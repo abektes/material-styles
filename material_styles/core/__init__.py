@@ -1,9 +1,4 @@
-"""Backward-compatibility facade for stylelib.
-
-All core rendering primitives, substrate physics, and canvas operations have
-been modularized into material_styles.core. This module re-exports everything
-to ensure zero breakage for legacy scripts.
-"""
+"""Core rendering engine primitives, canvas, and typography."""
 from material_styles.core.content import PosterContent
 from material_styles.core.primitives import (
     seed_of,

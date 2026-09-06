@@ -2,9 +2,10 @@
 
 [![Skill: material-styles](https://img.shields.io/badge/skill-material--styles-black?style=flat-square)](SKILL.md)
 [![Status: Verified 15/15](https://img.shields.io/badge/audit-15%2F15%20PASS-success?style=flat-square)](STYLES-GUIDE.md)
-[![Reproducibility: SHA--256 Identical](https://img.shields.io/badge/dual--pass-SHA--256%20identical-blue?style=flat-square)](render_styles_gallery.py)
+[![Reproducibility: SHA--256 Identical](https://img.shields.io/badge/dual--pass-SHA--256%20identical-blue?style=flat-square)](material_styles/audit.py)
+[![Tests: Pytest Passing](https://img.shields.io/badge/tests-34%20passed-success?style=flat-square)](tests/)
 
-A comprehensive AI agent skill and deterministic vector design engine inspired by and expanding upon [mono-color-skill](https://github.com/yanliudesign/mono-color-skill).
+An extensible AI agent skill and modular physical design engine inspired by and expanding upon [mono-color-skill](https://github.com/yanliudesign/mono-color-skill).
 
 Instead of treating design styles as arbitrary prompt adjectives ("ultra-detailed", "retro", "aesthetic"), this system models **physical reproduction mechanics**:
 $$\text{Substrate Chemistry} + \text{Plate Separations} + \text{Reproduction Engine} + \text{Typographic Hierarchy} + \text{Seeded Imperfections}$$
@@ -19,7 +20,7 @@ $$\text{Substrate Chemistry} + \text{Plate Separations} + \text{Reproduction Eng
 
 ## The 15 Physical Design Systems
 
-All 15 posters were generated with `render_styles_gallery.py` + `stylelib.py` (Python/PIL) and verified to be **100% byte-for-byte reproducible** (identical SHA-256 hashes across consecutive runs):
+All 15 posters are implemented as modular plugins in `material_styles/styles/` and verified to be **100% byte-for-byte reproducible** (identical SHA-256 hashes across consecutive runs):
 
 | # | Poster File | Style Name | Substrate | Spot Pigments & Inks | Reproductive System | Zone% | Gate Range | Gate Status |
 |---|-------------|------------|-----------|----------------------|---------------------|:-----:|:----------:|:-----------:|
@@ -41,50 +42,98 @@ All 15 posters were generated with `render_styles_gallery.py` + `stylelib.py` (P
 
 ---
 
-## Installation & Usage as an AI Agent Skill
+## Installation & CLI Usage
 
-### 1. Claude Code
-Clone directly into your Claude skills directory:
+### Installation
 ```bash
-git clone https://github.com/abektes/material-styles.git ~/.claude/skills/material-styles
+git clone https://github.com/abektes/material-styles.git
+cd material-styles
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .[test]
 ```
 
-### 2. Google Antigravity / Gemini CLI
-Clone or place in your workspace or global agent customizations:
-```bash
-git clone https://github.com/abektes/material-styles.git .agents/skills/material-styles
-```
+### CLI Commands
 
-### 3. OpenAgentSkill / Codex / Cursor
-Reference `SKILL.md` directly. Any AI assistant can load `SKILL.md` to:
-- Resolve briefs into the **Universal Recipe Manifest**.
-- Generate 5-paragraph production prompts for Midjourney, Flux, Imagen, or SDXL.
-- Generate and run deterministic Python vector render scripts.
+```bash
+# 1. List all available styles, lineages, and empty paper gates
+material-styles list
+
+# 2. Render any poster with custom text & titles
+material-styles render --style 02 --headline "FUTURE VISIONS" --subhead "BERLIN AVANT-GARDE 2026" -o custom_poster.png
+
+# 3. Scaffold a new physical style module
+material-styles new-style "Memphis Group 1981" --id style_memphis_81
+
+# 4. Audit empty paper gates and byte-for-byte SHA-256 determinism
+material-styles audit
+
+# 5. Batch render the complete gallery and master contact sheet
+material-styles gallery
+```
 
 ---
 
-## Deterministic Python Rendering
+## Python API Usage
 
-To reproduce all 15 posters and the master contact sheet locally:
+Use `material-styles` directly in your Python applications and generative pipelines:
 
-```bash
-# Setup virtual environment and dependencies
-python3 -m venv .venv
-source .venv/bin/activate
-pip install pillow
+```python
+from material_styles import render_poster, list_styles
 
-# Run the gallery generator and gate audit
-python render_styles_gallery.py
+# List all loaded styles
+for style in list_styles():
+    print(style.metadata.number, style.metadata.name)
+
+# Programmatically generate an editorial poster
+result = render_poster(
+    style=2,  # or "style_pop_art_serigraphy"
+    headline="LOVE & REVOLT",
+    subhead="SUMMER BENEFIT CONCERT 2026",
+    output="my_pop_poster.png"
+)
+print(f"Rendered: {result['path']} | Empty Paper: {result['zempty']:.1f}%")
 ```
+
+---
+
+## Contributing New Directions
+
+We encourage designers and developers to contribute new physical directions!
+Please see [**`CONTRIBUTING.md`**](CONTRIBUTING.md) for the 5-step guide on:
+1. Scaffolding with `material-styles new-style`.
+2. Defining substrate chemistry and spot pigments.
+3. Implementing physical print mechanics.
+4. Passing automated empty paper gates.
+5. Opening a Pull Request.
+
+---
+
+## AI Agent Integration
+
+Reference `SKILL.md` directly. Any AI assistant (Claude Code, Google Antigravity, OpenAgentSkill, Cursor, Codex) can load `SKILL.md` to:
+- Resolve design briefs into the **Universal Recipe Manifest**.
+- Generate 5-paragraph production prompts for Midjourney, Flux, Imagen, or SDXL.
+- Write and execute deterministic Python vector render scripts.
 
 ---
 
 ## Repository Structure
 
 - [`SKILL.md`](SKILL.md): Master AI agent skill instructions and compiler rules.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md): Guide for third-party contributors creating new directions.
 - [`STYLES-GUIDE.md`](STYLES-GUIDE.md): Exhaustive design guide, visual references, and historical lineages.
 - [`design-system/`](design-system/): Machine-readable catalogs for styles, colors, compositions, typography, rhythm, and imperfections.
-- [`stylelib.py`](stylelib.py): Core physical rendering engine (supersampling, optical multiply overprints, rotated halftones, CMYK rosettes, linocut relief, scanlines, Bayer dithering, gates).
-- [`render_styles_gallery.py`](render_styles_gallery.py): Reproducible generator for all 15 posters and the master contact sheet.
+- [`material_styles/`](material_styles/): Modern modular Python package:
+  - `core/`: Canvas supersampling, rotated halftones, CMYK rosettes, linocut relief, scanlines, typography auto-fitting.
+  - `styles/`: Self-contained `BaseStyle` modules (`s01` to `s15`) + `custom/` plugin directory.
+  - `registry.py`: Dynamic style discovery engine.
+  - `scaffold.py`: Boilerplate generator for new directions.
+  - `audit.py`: Automated gate and SHA-256 determinism verifier.
+  - `cli.py`: Unified CLI (`list`, `render`, `new-style`, `audit`, `gallery`).
+- [`tests/`](tests/): Complete automated `pytest` test suite (34 passing tests).
+- [`.github/workflows/ci.yml`](.github/workflows/ci.yml): GitHub Actions CI workflow for PR auditing.
+- [`stylelib.py`](stylelib.py): Backward-compatible facade for legacy scripts.
+- [`render_styles_gallery.py`](render_styles_gallery.py): Reproducible generator for all 15 posters and contact sheet.
 - [`styles_gallery/`](styles_gallery/): 15 full-resolution (1200×1600) rendered posters.
 - [`styles_contact_sheet.png`](styles_contact_sheet.png): Master audit sheet (1644×1510).

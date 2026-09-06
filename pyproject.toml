@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "material-styles"
+version = "0.2.0"
+description = "15 Systematic Physical Design Systems & Generative Print Engine"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Ahmet Bektes"}
+]
+keywords = ["design-systems", "generative-art", "typography", "print-making", "halftone", "pil", "ai-agent-skill"]
+dependencies = [
+    "pillow>=10.0.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0"
+]
+
+[project.scripts]
+material-styles = "material_styles.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["material_styles*"]
