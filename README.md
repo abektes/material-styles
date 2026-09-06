@@ -4,6 +4,7 @@
 [![Status: Verified 15/15](https://img.shields.io/badge/audit-15%2F15%20PASS-success?style=flat-square)](STYLES-GUIDE.md)
 [![Reproducibility: SHA--256 Identical](https://img.shields.io/badge/dual--pass-SHA--256%20identical-blue?style=flat-square)](material_styles/audit.py)
 [![Tests: Pytest Passing](https://img.shields.io/badge/tests-34%20passed-success?style=flat-square)](tests/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 An extensible AI agent skill and modular physical design engine inspired by and expanding upon [mono-color-skill](https://github.com/yanliudesign/mono-color-skill).
 
@@ -120,6 +121,7 @@ Reference `SKILL.md` directly. Any AI assistant (Claude Code, Google Antigravity
 
 ## Repository Structure
 
+- [`LICENSE`](LICENSE): Open source MIT License.
 - [`SKILL.md`](SKILL.md): Master AI agent skill instructions and compiler rules.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Guide for third-party contributors creating new directions.
 - [`STYLES-GUIDE.md`](STYLES-GUIDE.md): Exhaustive design guide, visual references, and historical lineages.
