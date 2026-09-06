@@ -90,6 +90,51 @@
       "dominant_subject_percent": [50, 70],
       "anchors": ["isometric_30_grid", "right_specification_column"],
       "rule": "Subject rendered in precise isometric line weights with numbered leader callouts and tabular spec legend."
+    },
+    {
+      "id": "comp_sosaku_hanga_relief",
+      "style": "style_sosaku_hanga",
+      "name": "Sōsaku-Hanga Woodcut Relief & Hanko Seal",
+      "empty_paper_percent": [30, 50],
+      "dominant_subject_percent": [50, 70],
+      "anchors": ["woodcut_relief_core", "hanko_seal_corner"],
+      "rule": "Munakata expressive gouged woodblock silhouette; baren ink starvation rubbing; vermilion hanko seal chop mark."
+    },
+    {
+      "id": "comp_cyber_new_wave_rosette",
+      "style": "style_swiss_cyber_newwave",
+      "name": "Swiss Cyber New Wave Wireframe & Rosette Field",
+      "empty_paper_percent": [25, 45],
+      "dominant_subject_percent": [55, 75],
+      "anchors": ["wireframe_cube_center", "cmyk_rosette_bleed"],
+      "rule": "Weingart step-and-repeat tilted sans; Greiman 3D axonometric wireframe; CMYK rosette screen angles and video scanlines."
+    },
+    {
+      "id": "comp_blue_note_duotone_crop",
+      "style": "style_blue_note_hardbop",
+      "name": "Reid Miles Asymmetric Duotone Crop",
+      "empty_paper_percent": [20, 42],
+      "dominant_subject_percent": [65, 82],
+      "anchors": ["duotone_sax_crop", "monumental_grotesk_header"],
+      "rule": "Francis Wolff intimate performance photograph in 45-degree halftone; Reid Miles monolithic uppercase title bar with catalog accession mark."
+    },
+    {
+      "id": "comp_bauhaus_typofoto_photogram",
+      "style": "style_bauhaus_typofoto",
+      "name": "László Moholy-Nagy Optical Photogram & Typofoto",
+      "empty_paper_percent": [35, 55],
+      "dominant_subject_percent": [50, 70],
+      "anchors": ["photogram_refraction_orbit", "constructive_red_ray"],
+      "rule": "Camereless darkroom exposure of translucent lenses and optical springs; diagonal constructivist red vector; Herbert Bayer elemental lowercase type."
+    },
+    {
+      "id": "comp_polish_surrealist_metaphor",
+      "style": "style_polish_surrealism",
+      "name": "Polish Poster School Painterly Metaphor",
+      "empty_paper_percent": [28, 48],
+      "dominant_subject_percent": [55, 75],
+      "anchors": ["biological_contour_face", "concentric_vortex"],
+      "rule": "Jan Lenica visceral silhouette contour; concentric woodcut cut-paper rings; painterly hand-lettered theatrical titling."
     }
   ]
 }

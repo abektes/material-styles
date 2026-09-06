@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Systematic index of 10 material-driven, physically grounded design styles.",
+  "description": "Systematic index of 15 material-driven, physically grounded design styles.",
   "styles": [
     {
       "id": "style_zurich_modernism",
@@ -151,6 +151,81 @@
       "type_scale_jump": [5, 9],
       "composition_families": ["axonometric_exploded_view", "orthogonal_elevation_legend", "specification_datasheet"],
       "signature_imperfections": ["imperfection_plotter_pen_dwell", "imperfection_drafting_ruler_smudge"]
+    },
+    {
+      "id": "style_sosaku_hanga",
+      "name": "Japanese Sōsaku-Hanga Woodcut",
+      "subtitle": "Shikō Munakata & Creative Print Movement",
+      "lineage": "Shikō Munakata (1903–1975, Buddhist print cycles), Kōshirō Onchi, Un'ichi Hiratsuka, Sōsaku-Hanga creative print movement (1918–1955)",
+      "philosophy": "Self-carved, self-printed artist expression, raw baren relief pressure rubbing, fibrous mulberry kozo washi, sumi carbon ink and cinnabar vermilion hanko stamps.",
+      "default_substrate": "substrate_echizen_washi",
+      "default_palette": "palette_sosaku_sumi_cinnabar",
+      "empty_paper_gate": [30, 50],
+      "dominant_plate_gate": [70, 85],
+      "accent_plate_gate": [15, 30],
+      "type_scale_jump": [6, 12],
+      "composition_families": ["baren_rubbed_silhouette", "hanko_seal_vertical_poetry", "kozo_fiber_woodblock"],
+      "signature_imperfections": ["imperfection_baren_swirl_pressure", "imperfection_woodblock_carve_gouge"]
+    },
+    {
+      "id": "style_swiss_cyber",
+      "name": "1980s Swiss Cyber New Wave",
+      "subtitle": "Wolfgang Weingart & April Greiman Hybrid Typography",
+      "lineage": "Wolfgang Weingart (Basel Kunstgewerbeschule), April Greiman (Does It Make Sense? 1986, CalArts, early Mac 128k bitmapped typography)",
+      "philosophy": "High-gloss Kromekote substrate, offset CMYK multi-angle halftone rosettes, CRT scanlines with chromatic aberration jitter, 72-dpi bitmapped type colliding with wide-spaced Swiss letterforms.",
+      "default_substrate": "substrate_kromekote_gloss",
+      "default_palette": "palette_cyber_new_wave",
+      "empty_paper_gate": [25, 45],
+      "dominant_plate_gate": [60, 75],
+      "accent_plate_gate": [25, 40],
+      "type_scale_jump": [8, 14],
+      "composition_families": ["cmyk_rosette_space_collage", "bitmapped_wireframe_cube", "scanline_video_still"],
+      "signature_imperfections": ["imperfection_crt_scanline_jitter", "imperfection_film_overlay_dust"]
+    },
+    {
+      "id": "style_blue_note",
+      "name": "1950s Blue Note Hard Bop",
+      "subtitle": "Reid Miles & Francis Wolff Jazz Covers",
+      "lineage": "Reid Miles (Art Director, Blue Note Records 1956–1967), Francis Wolff (photography), Alfred Lion",
+      "philosophy": "Severe asymmetric crop of high-contrast musician silhouette, 45-degree photographic halftone grain, massive Franklin Gothic uppercase scale jump, saturated single-color header bar and catalog session numbers.",
+      "default_substrate": "substrate_album_cardboard",
+      "default_palette": "palette_blue_note_ochre",
+      "empty_paper_gate": [20, 42],
+      "dominant_plate_gate": [70, 85],
+      "accent_plate_gate": [15, 30],
+      "type_scale_jump": [10, 16],
+      "composition_families": ["asymmetric_musician_crop", "ochre_banner_monumental_type", "blue_note_session_datasheet"],
+      "signature_imperfections": ["imperfection_album_sleeve_ringwear", "imperfection_letterpress_ink_squeeze"]
+    },
+    {
+      "id": "style_bauhaus_typofoto",
+      "name": "Bauhaus Photogram & Typofoto",
+      "subtitle": "László Moholy-Nagy & Herbert Bayer 1925",
+      "lineage": "László Moholy-Nagy (Painting, Photography, Film 1925, rayograms), Herbert Bayer (Universal Type, Dessau Bauhaus 1925–1928)",
+      "philosophy": "Direct light photogram exposure on silver gelatin paper without a camera, optical lens luminescence and refraction shadows, stark lowercase Bayer sans, primary Bauhaus red directional force lines.",
+      "default_substrate": "substrate_bromo_chloride",
+      "default_palette": "palette_bauhaus_typofoto",
+      "empty_paper_gate": [35, 55],
+      "dominant_plate_gate": [75, 88],
+      "accent_plate_gate": [12, 25],
+      "type_scale_jump": [8, 14],
+      "composition_families": ["photogram_lens_refraction", "typofoto_constructivist_ray", "universal_lowercase_specimen"],
+      "signature_imperfections": ["imperfection_darkroom_silver_mottle", "imperfection_glass_negative_pinhole"]
+    },
+    {
+      "id": "style_polish_surrealism",
+      "name": "1970s Polish Poster School Surrealism",
+      "subtitle": "Jan Lenica & Henryk Tomaszewski Theatrical Metaphor",
+      "lineage": "Jan Lenica (Wozzeck 1964, Alban Berg), Henryk Tomaszewski, Franciszek Starowieyski, Polish Poster School (1955–1980)",
+      "philosophy": "Expressive biological metaphor, concentric organic contour rings in Poison Olive and Crimson Rust, hand-drawn painterly brush lettering, raw gouache textures with slight paper bleed.",
+      "default_substrate": "substrate_polish_offset",
+      "default_palette": "palette_polish_theatrical",
+      "empty_paper_gate": [28, 48],
+      "dominant_plate_gate": [65, 80],
+      "accent_plate_gate": [20, 35],
+      "type_scale_jump": [7, 13],
+      "composition_families": ["surrealist_biological_contour", "concentric_grotesque_rings", "painterly_theatrical_imprint"],
+      "signature_imperfections": ["imperfection_gouache_edge_bleed", "imperfection_woodcut_chisel_tear"]
     }
   ]
 }

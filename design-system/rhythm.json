@@ -10,25 +10,25 @@
     {
       "id": "tension_contemplative",
       "name": "Contemplative / Atmospheric",
-      "use_for": ["style_cyanotype_heliography", "style_wabi_sabi_mokuhanga", "style_victorian_chromolitho"],
+      "use_for": ["style_victorian_chromolitho", "style_sosaku_hanga", "style_bauhaus_typofoto", "style_polish_surrealism"],
       "description": "Expansive negative space, suspended solitary subjects, unhurried reading cadence."
     },
     {
       "id": "tension_vibrant_collision",
       "name": "Vibrant Overprint Collision",
-      "use_for": ["style_tokyo_riso_lab", "style_solarized_chemigram"],
+      "use_for": ["style_pop_art_serigraphy", "style_tokyo_riso_lab", "style_swiss_cyber_newwave"],
       "description": "Plates collide and overlap, unexpected chromatic reactions, controlled visual density."
     },
     {
       "id": "tension_kinetic_agit",
       "name": "Kinetic Agitation / Force Vector",
-      "use_for": ["style_constructivist_agit", "style_punk_xerox_ransom"],
+      "use_for": ["style_constructivist_agit", "style_punk_xerox_ransom", "style_blue_note_hardbop"],
       "description": "High directional velocity, diagonal wedges, aggressive contrast, anti-establishment rupture."
     },
     {
       "id": "tension_raw_stream",
       "name": "Raw Serial Stream",
-      "use_for": ["style_thermal_fax_brutalism"],
+      "use_for": ["style_thermal_fax_brutalism", "style_dutch_matrix_modernism", "style_de_stijl_rietveld"],
       "description": "Continuous telemetry, uncurated data stream, mechanical relentless progression."
     }
   ],
@@ -38,6 +38,11 @@
     {"id": "event_diagonal_wedge_severing_frame", "description": "A 45-degree acute angle wedge divides the canvas into dynamic force fields."},
     {"id": "event_isolated_specimen_orbit", "description": "One hero specimen suspended in profound negative space surrounded by micro-accessions."},
     {"id": "event_1bit_dither_gradient_burst", "description": "Photographic subject dissolves into a mathematical Floyd-Steinberg pixel constellation."},
-    {"id": "event_intaglio_crosshatch_density", "description": "Hyper-dense copperplate engraving lines pooling into velvety black shadow."}
+    {"id": "event_intaglio_crosshatch_density", "description": "Hyper-dense copperplate engraving lines pooling into velvety black shadow."},
+    {"id": "event_woodcut_baren_starvation", "description": "Hand-carved woodblock relief showing raw gouge marks and uneven baren ink starvation."},
+    {"id": "event_cmyk_rosette_moire", "description": "Superimposed 15/45/75 degree angled halftone screens generating an authentic optical rosette pattern."},
+    {"id": "event_monumental_crop_collision", "description": "Cropped photographic hero subject collided against a compressed monumental wood-type title bar."},
+    {"id": "event_photogram_xray_translucency", "description": "Camereless darkroom exposure with inverse light gradation simulating refractive optical glass."},
+    {"id": "event_surrealist_visceral_vortex", "description": "Concentric biological contours drawing the eye into a central psychological void."}
   ]
 }

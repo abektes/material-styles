@@ -80,6 +80,46 @@
       "rgb": [248, 248, 246],
       "finish": "translucent technical vellum with subtle grid",
       "associated_styles": ["style_braun_patent_schematic"]
+    },
+    {
+      "id": "substrate_echizen_washi",
+      "name": "Echizen Raw Mulberry Washi",
+      "hex": "#F3EFE6",
+      "rgb": [243, 239, 230],
+      "finish": "textured long-fiber hand-laid washi",
+      "associated_styles": ["style_sosaku_hanga"]
+    },
+    {
+      "id": "substrate_kromekote_gloss",
+      "name": "Kromekote Mirror Cast Board",
+      "hex": "#F8F8FC",
+      "rgb": [248, 248, 252],
+      "finish": "ultra-high gloss cast coated synthetic",
+      "associated_styles": ["style_swiss_cyber_newwave"]
+    },
+    {
+      "id": "substrate_album_cardboard",
+      "name": "Heavy Pressboard LP Jacket",
+      "hex": "#F7F5EE",
+      "rgb": [247, 245, 238],
+      "finish": "heavy uncoated record sleeve board",
+      "associated_styles": ["style_blue_note_hardbop"]
+    },
+    {
+      "id": "substrate_bromo_chloride",
+      "name": "Matte Bromo-Chloride Darkroom Stock",
+      "hex": "#EDE8DF",
+      "rgb": [237, 232, 223],
+      "finish": "silver gelatin emulsion tooth",
+      "associated_styles": ["style_bauhaus_typofoto"]
+    },
+    {
+      "id": "substrate_polish_offset",
+      "name": "Warsaw Calendered Offset Stock",
+      "hex": "#EBE3D0",
+      "rgb": [235, 227, 208],
+      "finish": "chalky mid-century Eastern European litho paper",
+      "associated_styles": ["style_polish_surrealism"]
     }
   ],
   "inks": [
@@ -108,7 +148,21 @@
     {"id": "ink_destijl_yellow", "name": "Primary Chrome Yellow", "hex": "#F9C80E", "rgb": [249, 200, 14], "type": "opaque_lacquer_pigment"},
     {"id": "ink_destijl_black", "name": "De Stijl Bone Black", "hex": "#141414", "rgb": [20, 20, 20], "type": "deep_bone_black"},
     {"id": "ink_india_technical", "name": "Technical Drawing India Ink", "hex": "#1C1D1F", "rgb": [28, 29, 31], "type": "rotring_liquid_ink"},
-    {"id": "ink_bauhaus_yellow", "name": "Industrial Bauhaus Yellow", "hex": "#F5A623", "rgb": [245, 166, 35], "type": "signal_spot"}
+    {"id": "ink_bauhaus_yellow", "name": "Industrial Bauhaus Yellow", "hex": "#F5A623", "rgb": [245, 166, 35], "type": "signal_spot"},
+    {"id": "ink_sumi_pine_soot", "name": "Pine-Soot Sumi Ink", "hex": "#1E1C1A", "rgb": [30, 28, 26], "type": "mineral_sumi_wash"},
+    {"id": "ink_cinnabar_vermilion", "name": "Cinnabar Vermilion Hanko", "hex": "#C8382B", "rgb": [200, 56, 43], "type": "mineral_hanko_paste"},
+    {"id": "ink_indigo_washi", "name": "Natural Aizome Indigo", "hex": "#2B4C6F", "rgb": [43, 76, 111], "type": "natural_indigo_woodblock"},
+    {"id": "ink_laser_cyan", "name": "Electric Laser Cyan", "hex": "#00E5FF", "rgb": [0, 229, 255], "type": "fluorescent_cmyk_screen"},
+    {"id": "ink_acid_chartreuse", "name": "Acid CRT Chartreuse", "hex": "#76FF03", "rgb": [118, 255, 3], "type": "high_intensity_spot"},
+    {"id": "ink_cyber_magenta", "name": "Process Magenta Spot", "hex": "#FF007F", "rgb": [255, 0, 127], "type": "cmyk_rosette_process"},
+    {"id": "ink_cyber_carbon", "name": "Deep CRT Charcoal", "hex": "#121218", "rgb": [18, 18, 24], "type": "high_contrast_key"},
+    {"id": "ink_blp_deep_black", "name": "Velvet Gravure Black", "hex": "#101012", "rgb": [16, 16, 18], "type": "heavy_gravure_process"},
+    {"id": "ink_blp_warm_ochre", "name": "Cadmium Ochre Gold", "hex": "#E09B19", "rgb": [224, 155, 25], "type": "opaque_spot_pigment"},
+    {"id": "ink_silver_gelatin_black", "name": "Silver Gelatin Deep Black", "hex": "#141416", "rgb": [20, 20, 22], "type": "chemically_developed_silver"},
+    {"id": "ink_bauhaus_signal_red", "name": "Constructive Bayer Red", "hex": "#E02E1B", "rgb": [224, 46, 27], "type": "pure_monochrome_spot"},
+    {"id": "ink_poison_olive", "name": "Surreal Poison Olive", "hex": "#4D592B", "rgb": [77, 89, 43], "type": "viscous_matte_litho"},
+    {"id": "ink_crimson_rust", "name": "Theatrical Crimson Rust", "hex": "#9E2A2B", "rgb": [158, 42, 43], "type": "viscous_matte_litho"},
+    {"id": "ink_warsaw_charcoal", "name": "Lithographic Charcoal Paste", "hex": "#1F1D1A", "rgb": [31, 29, 26], "type": "heavy_crayon_tusche"}
   ],
   "palettes": [
     {"id": "palette_zurich_red_black", "style": "style_zurich_modernism", "dominant": "ink_zurich_black", "accent": "ink_swiss_signal_red", "mode": "2-plate spot"},
@@ -120,6 +174,11 @@
     {"id": "palette_naturalist_triad", "style": "style_victorian_chromolitho", "plates": ["ink_engravers_bitumen", "ink_mineral_indigo", "ink_burnt_umber"], "mode": "3-plate chromolithograph"},
     {"id": "palette_toner_acid_lemon", "style": "style_punk_xerox_ransom", "dominant": "ink_copier_toner", "accent": "ink_acid_lemon", "mode": "high-contrast xerox + day-glo"},
     {"id": "palette_de_stijl_primary", "style": "style_de_stijl_rietveld", "plates": ["ink_destijl_red", "ink_destijl_blue", "ink_destijl_yellow", "ink_destijl_black"], "mode": "neoplastic primary separation"},
-    {"id": "palette_patent_india_yellow", "style": "style_braun_patent_schematic", "dominant": "ink_india_technical", "accent": "ink_bauhaus_yellow", "mode": "technical dual-pen"}
+    {"id": "palette_patent_india_yellow", "style": "style_braun_patent_schematic", "dominant": "ink_india_technical", "accent": "ink_bauhaus_yellow", "mode": "technical dual-pen"},
+    {"id": "palette_sosaku_sumi_cinnabar", "style": "style_sosaku_hanga", "plates": ["ink_sumi_pine_soot", "ink_cinnabar_vermilion", "ink_indigo_washi"], "mode": "baren-rubbed woodblock relief"},
+    {"id": "palette_cyber_new_wave", "style": "style_swiss_cyber_newwave", "plates": ["ink_laser_cyan", "ink_acid_chartreuse", "ink_cyber_magenta", "ink_cyber_carbon"], "mode": "4-plate process rosette + scanline overprint"},
+    {"id": "palette_blue_note_ochre", "style": "style_blue_note_hardbop", "dominant": "ink_blp_deep_black", "accent": "ink_blp_warm_ochre", "mode": "2-plate duo-tone crop"},
+    {"id": "palette_bauhaus_typofoto", "style": "style_bauhaus_typofoto", "dominant": "ink_silver_gelatin_black", "accent": "ink_bauhaus_signal_red", "mode": "photogram optical inversion + spot typography"},
+    {"id": "palette_polish_theatrical", "style": "style_polish_surrealism", "plates": ["ink_poison_olive", "ink_crimson_rust", "ink_warsaw_charcoal"], "mode": "layered painterly tusche wash"}
   ]
 }

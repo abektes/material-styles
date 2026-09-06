@@ -199,7 +199,7 @@ class StylePoster:
         mult_ink = multiply_colors(ink1, ink2)
         self.stamp(overlap_mask, mult_ink)
 
-    # ---------------- Halftone screening ----------------
+    # ---------------- Halftone screening (Classic & Multi-Angle Duxt Engine) ----------------
     def halftone(
         self,
         x0,
@@ -230,6 +230,135 @@ class StylePoster:
                         self.dot(orig_x + drift[0], orig_y + drift[1], r, ink)
                 xx += pitch_s
             yy += pitch_s
+
+    def rotated_halftone(
+        self,
+        x0,
+        y0,
+        x1,
+        y1,
+        pitch,
+        angle_deg,
+        density_fn,
+        ink,
+        shape="circle",
+        max_r=None,
+        jitter=0.04,
+        drift=(0, 0),
+    ):
+        """
+        Rotated halftone screen at arbitrary angle (e.g. 15, 45, 75 degrees)
+        supporting circle, square, diamond, and cross shapes (inspired by duxt).
+        """
+        import math
+        rad = math.radians(angle_deg)
+        cos_a = math.cos(rad)
+        sin_a = math.sin(rad)
+        cx = (x0 + x1) / 2.0
+        cy = (y0 + y1) / 2.0
+        diag = math.hypot(x1 - x0, y1 - y0)
+        u_min, u_max = -diag / 2.0, diag / 2.0
+        v_min, v_max = -diag / 2.0, diag / 2.0
+
+        if max_r is None:
+            max_r = pitch * 0.58
+
+        u = u_min
+        while u <= u_max:
+            v = v_min
+            while v <= v_max:
+                # Rotate back to poster space
+                px = cx + u * cos_a - v * sin_a + drift[0]
+                py = cy + u * sin_a + v * cos_a + drift[1]
+                if x0 <= px <= x1 and y0 <= py <= y1:
+                    density = density_fn(px, py)
+                    if density > 0.03:
+                        r = max_r * math.sqrt(min(1.0, density))
+                        if jitter > 0:
+                            r *= 1.0 + self.rng.uniform(-jitter, jitter)
+                        if shape == "circle":
+                            self.dot(px, py, r, ink)
+                        elif shape == "square":
+                            self.rect(px - r, py - r, px + r, py + r, ink)
+                        elif shape == "diamond":
+                            pts = [(px, py - r * 1.2), (px + r * 1.2, py), (px, py + r * 1.2), (px - r * 1.2, py)]
+                            self.poly(pts, ink)
+                        elif shape == "cross":
+                            th = max(1.0, r * 0.4)
+                            self.rect(px - r, py - th, px + r, py + th, ink)
+                            self.rect(px - th, py - r, px + th, py + r, ink)
+                        elif shape == "line":
+                            self.line([(px - pitch * 0.45, py), (px + pitch * 0.45, py)], ink, w=max(1.0, r * 1.5))
+                v += pitch
+            u += pitch
+
+    def cmyk_rosette_field(
+        self,
+        x0,
+        y0,
+        x1,
+        y1,
+        pitch=14,
+        cmyk_fn=None,
+        c_ink=(0x00, 0x9F, 0xE3),
+        m_ink=(0xE6, 0x00, 0x7A),
+        y_ink=(0xFF, 0xDE, 0x00),
+        k_ink=(0x18, 0x18, 0x1A),
+    ):
+        """
+        Authentic 4-color offset lithography halftone rosette field (duxt CMYK angles):
+        Cyan: 15°, Magenta: 75°, Yellow: 0°, Black: 45°
+        """
+        if cmyk_fn is None:
+            return
+        # Yellow plate (0 deg)
+        self.rotated_halftone(x0, y0, x1, y1, pitch, 0, lambda x, y: cmyk_fn(x, y)[2], y_ink, shape="circle")
+        # Cyan plate (15 deg)
+        self.rotated_halftone(x0, y0, x1, y1, pitch, 15, lambda x, y: cmyk_fn(x, y)[0], c_ink, shape="circle")
+        # Magenta plate (75 deg)
+        self.rotated_halftone(x0, y0, x1, y1, pitch, 75, lambda x, y: cmyk_fn(x, y)[1], m_ink, shape="circle")
+        # Black / Key plate (45 deg)
+        self.rotated_halftone(x0, y0, x1, y1, pitch, 45, lambda x, y: cmyk_fn(x, y)[3], k_ink, shape="circle")
+
+    # ---------------- Linocut & Woodblock Relief Gouging (Duxt Linocut) ----------------
+    def linocut_relief(self, poly_pts, ink, bg_ink, num_gouges=8, seed=42):
+        """
+        Simulates hand-carved relief woodblock gouges inside a solid polygon.
+        """
+        # Draw solid polygon
+        self.poly(poly_pts, ink)
+        # Bounding box of poly
+        xs = [p[0] for p in poly_pts]
+        ys = [p[1] for p in poly_pts]
+        min_x, max_x = min(xs), max(xs)
+        min_y, max_y = min(ys), max(ys)
+        
+        # Carve white gouges along grain
+        step_y = (max_y - min_y) / (num_gouges + 1)
+        for i in range(1, num_gouges + 1):
+            gy = min_y + i * step_y + ((i * 17) % 7) - 3
+            gx0 = min_x + 15 + ((i * 23) % 25)
+            gx1 = max_x - 15 - ((i * 31) % 25)
+            if gx1 > gx0 + 30:
+                w = 1.5 if i % 2 == 0 else 2.5
+                # Slightly wavily carve out substrate color
+                pts = [
+                    (gx0, gy),
+                    ((gx0 + gx1) * 0.4, gy + ((i * 13) % 9) - 4),
+                    ((gx0 + gx1) * 0.7, gy - ((i * 11) % 7) + 3),
+                    (gx1, gy),
+                ]
+                self.line(pts, bg_ink, w=w)
+
+    # ---------------- Scanlines & Chromatic Jitter (Duxt Scanlines) ----------------
+    def scanlines(self, x0, y0, x1, y1, ink, period=4, depth=0.4, aberration=2, jitter=1.0):
+        """
+        Draws alternating scanline rows with slight horizontal jitter,
+        emulating CRT, POS thermal printer roll, and photocopier drum passes.
+        """
+        for y in range(int(y0), int(y1), period):
+            jit = int((self.rng.random() - 0.5) * 2 * jitter)
+            self.line([(x0 + jit - aberration, y), (x1 + jit + aberration, y)], ink, w=1.0)
 
     # ---------------- 1-Bit Algorithmic Dithering (Thermal Fax) ----------------
     def dither_1bit_field(self, x0, y0, x1, y1, grad_fn, ink, step=2):

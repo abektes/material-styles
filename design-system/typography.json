@@ -110,6 +110,61 @@
       "leading": "standardized technical, 1.15x font size",
       "case": "Uppercase figure titles ('FIG. 1', 'SECTION A-A'); lowercase component specification notes",
       "rules": "Circled reference callout numerals ('12', '14a') anchored with 45-degree arrow leaders."
+    },
+    {
+      "id": "type_sosaku_chiseled_wood",
+      "style": "style_sosaku_hanga",
+      "display_font": "Chiseled Block Woodcut / Raw Grotesk",
+      "support_font": "Hand-Carved Seal Mark / Monospace",
+      "scale_jump": "8:1 to 14:1",
+      "tracking": 3,
+      "leading": "open, 1.2x font size",
+      "case": "Uppercase carved display; geometric hanko seals",
+      "rules": "Carved knife facets on letter strokes; red hanko stamp in margins."
+    },
+    {
+      "id": "type_cyber_weingart_stepped",
+      "style": "style_swiss_cyber_newwave",
+      "display_font": "Tilted Stepped Univers / Bitmapped Grotesk",
+      "support_font": "OCR-B / Macintosh Geneva Monospace",
+      "scale_jump": "7:1 to 13:1",
+      "tracking": 4,
+      "leading": "variable stepped, 0.9x to 1.3x",
+      "case": "Uppercase philosophical queries; mixed bitmapped system labels",
+      "rules": "Letters step and jitter; diagonal angle baselines; wide letterspacing."
+    },
+    {
+      "id": "type_blue_note_monumental_grotesk",
+      "style": "style_blue_note_hardbop",
+      "display_font": "Franklin Gothic Extra Condensed / Trade Gothic Bold",
+      "support_font": "News Gothic Heavy / Futura Medium",
+      "scale_jump": "10:1 to 18:1",
+      "tracking": -2,
+      "leading": "solid compressed, 0.92x font size",
+      "case": "Massive uppercase artist name; compressed title bar with catalog code",
+      "rules": "Extreme scale jump; tight letter collision; horizontal banner locking into bleed."
+    },
+    {
+      "id": "type_bauhaus_bayer_elemental",
+      "style": "style_bauhaus_typofoto",
+      "display_font": "Herbert Bayer Universal / Bauhaus Condensed",
+      "support_font": "DIN 1451 Mittelschrift",
+      "scale_jump": "8:1 to 15:1",
+      "tracking": 1,
+      "leading": "dynamic, 1.05x font size",
+      "case": "Strictly lowercase typography; radical uncial simplicity",
+      "rules": "Horizontal and perpendicular text lockups; words aligned to constructivist focal rays."
+    },
+    {
+      "id": "type_polish_painterly_tusche",
+      "style": "style_polish_surrealism",
+      "display_font": "Hand-Brushed Lithographic Tusche / Expressive Serif",
+      "support_font": "Warsaw Theatrical Condensed",
+      "scale_jump": "7:1 to 14:1",
+      "tracking": 2,
+      "leading": "organic rhythmic, 1.1x font size",
+      "case": "Expressive mixed case theatrical titles; organic hand-rendered curves",
+      "rules": "Letterforms bleed organically with ink pooling; slight baseline wobble."
     }
   ]
 }

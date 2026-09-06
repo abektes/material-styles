@@ -31,6 +31,11 @@ SUB_LINEN = (0xF5, 0xEF, 0xE1)             # 07 Victorian
 SUB_BOND = (0xED, 0xEC, 0xE8)              # 08 Punk Xerox
 SUB_DESTIJL_PRESSBOARD = (0xF5, 0xF3, 0xEB)# 09 De Stijl
 SUB_DRAFT = (0xF8, 0xF8, 0xF6)             # 10 Patent
+SUB_WASHI = (0xF6, 0xF2, 0xE8)             # 11 Sosaku Hanga
+SUB_KROMEKOTE = (0xFB, 0xFB, 0xFD)         # 12 Swiss Cyber
+SUB_ALBUM_JACKET = (0xF4, 0xF1, 0xEA)      # 13 Blue Note
+SUB_BROMO_CHLORIDE = (0xEF, 0xEC, 0xE4)    # 14 Bauhaus Typofoto
+SUB_POLISH_OFFSET = (0xF3, 0xEF, 0xEA)     # 15 Polish Surrealism
 
 INK_ZURICH_BLACK = (0x11, 0x11, 0x11)
 INK_SWISS_RED = (0xE5, 0x39, 0x35)
@@ -57,6 +62,20 @@ INK_DESTIJL_YELLOW = (0xF9, 0xC8, 0x0E)
 INK_DESTIJL_BLACK = (0x14, 0x14, 0x14)
 INK_INDIA_TECH = (0x1C, 0x1D, 0x1F)
 INK_BAUHAUS_YELLOW = (0xF5, 0xA6, 0x23)
+INK_SUMI = (0x1A, 0x18, 0x16)
+INK_CINNABAR = (0xD9, 0x38, 0x1E)
+INK_AOMORI_INDIGO = (0x26, 0x4E, 0x5A)
+INK_LASER_CYAN = (0x00, 0xF0, 0xFF)
+INK_ACID_CHARTREUSE = (0xD4, 0xFF, 0x00)
+INK_NEON_MAGENTA = (0xFF, 0x00, 0x55)
+INK_CYBER_BLACK = (0x0C, 0x0C, 0x0E)
+INK_VELVET_BLACK = (0x16, 0x16, 0x16)
+INK_BLUE_NOTE_OCHRE = (0xE5, 0x95, 0x00)
+INK_EMULSION_BLACK = (0x12, 0x11, 0x10)
+INK_BAUHAUS_RED = (0xD6, 0x28, 0x28)
+INK_GOUACHE_CHARCOAL = (0x1C, 0x1B, 0x1A)
+INK_POISON_OLIVE = (0x4D, 0x6A, 0x34)
+INK_CRIMSON_RUST = (0xA6, 0x2B, 0x2B)
 
 
 # ==============================================================================
@@ -119,81 +138,88 @@ def poster_02_pop_art():
         "style_pop_art_serigraphy",
         SUB_POP_CARDSTOCK,
         [INK_POP_MAGENTA, INK_POP_YELLOW, INK_POP_CYAN, INK_SQUEEGEE_BLACK],
-        "corita_kent|push_pin_pop|squeegee_silkscreen|benday_dots",
+        "corita_kent|push_pin_pop|warhol_exposure|cmyk_screen_angles",
     )
     dx, dy = P.drift
 
-    # 1. 45-degree Coarse Ben-Day Halftone Dot Screen Field in Cyan Plate
-    P.halftone(
-        460, 240, 1100, 940, 28,
-        lambda x, y: 4.5 + 8.5 * math.sin((x - y) / 160) ** 2,
-        lambda x, y: True,
+    # 1. Radiant Yellow Screen Block (Saturated Pop ground)
+    P.rect(120, 240, 1080, 1080, INK_POP_YELLOW)
+
+    # 2. Multi-Angle Ben-Day Screens (Duxt screening engine: Cyan 15 deg, Magenta 75 deg)
+    # Cyan plate screened at 15 degrees
+    P.rotated_halftone(
+        140, 260, 1060, 1060, 22, 15,
+        lambda x, y: 0.15 + 0.70 * math.sin((x + y) / 180) ** 2,
         INK_POP_CYAN,
+        shape="circle",
         drift=(dx, dy),
     )
+    # Magenta plate screened at 75 degrees
+    P.rotated_halftone(
+        140, 260, 1060, 1060, 22, 75,
+        lambda x, y: 0.20 + 0.65 * math.cos((x - y) / 210) ** 2,
+        INK_POP_MAGENTA,
+        shape="circle",
+        drift=(-dx, -dy),
+    )
 
-    # 2. Exuberant Pop Art Graphic Silhouette: Radiant multi-petaled Pop Blossom / Heart
-    # Saturated Sunshine Yellow organic backing disc
-    P.ell(200, 360, 880, 1040, INK_POP_YELLOW)
+    # 3. High-Contrast Pop Portrait / Profile Silhouette in Squeegee Black
+    head_profile = [
+        (380, 1080), (380, 880), (410, 840), (420, 780), (460, 740),
+        (510, 710), (560, 690), (540, 640), (580, 600), (620, 580),
+        (660, 550), (700, 510), (730, 460), (770, 480), (810, 520),
+        (840, 580), (850, 660), (840, 740), (800, 820), (780, 880),
+        (800, 960), (820, 1080)
+    ]
+    # Squeegee offset shadow in Cyan
+    P.poly([(p[0] + dx * 3, p[1] + dy * 3) for p in head_profile], INK_POP_CYAN)
+    # Primary Squeegee Black silhouette
+    P.poly(head_profile, INK_SQUEEGEE_BLACK)
 
-    # Saturated Hot Magenta primary pop silhouette (Multi-lobed organic star/flower)
-    cx, cy = 540, 700
-    pts_flower = []
-    num_petals = 10
-    for deg in range(0, 360, 5):
-        rad = math.radians(deg)
-        r = 220 + 80 * math.sin(deg * (num_petals / 360 * math.pi * 2))
-        pts_flower.append((cx + math.cos(rad) * r, cy + math.sin(rad) * r))
-    P.poly(pts_flower, INK_POP_MAGENTA)
+    # Electric Pop Magenta Lips accent
+    lips_pts = [(620, 740), (670, 725), (710, 740), (670, 765)]
+    P.poly(lips_pts, INK_POP_MAGENTA)
+    P.line(lips_pts, INK_SQUEEGEE_BLACK, w=2.5)
 
-    # Inner core contrast disc in Cyan
-    P.ell(cx - 90 + dx, cy - 90 + dy, cx + 90 + dx, cy + 90 + dy, INK_POP_CYAN)
-    # Center punch in Squeegee Black
-    P.dot(cx, cy, 45, INK_SQUEEGEE_BLACK)
-    P.dot(cx, cy, 20, SUB_POP_CARDSTOCK)
+    # Eye accent with Pop Cyan iris
+    P.ell(650, 610, 710, 650, SUB_POP_CARDSTOCK)
+    P.dot(680, 630, 14, INK_POP_CYAN)
+    P.dot(680, 630, 6, INK_SQUEEGEE_BLACK)
 
-    # Heavy black Pop contour outline around flower with slight squeegee shift
-    for i in range(len(pts_flower)):
-        p1 = pts_flower[i]
-        p2 = pts_flower[(i + 1) % len(pts_flower)]
-        P.line([p1, p2], INK_SQUEEGEE_BLACK, w=4.5)
+    # 4. Squeegee ink drags along edge of screen frame
+    for sy in range(240, 1080, 45):
+        P.line([(120, sy), (120 + ((sy * 13) % 40), sy)], INK_SQUEEGEE_BLACK, w=3.0)
+        P.line([(1080 - ((sy * 17) % 35), sy), (1080, sy)], INK_POP_MAGENTA, w=2.5)
 
-    # 3. Dynamic Typographic Voice: Push Pin / Sister Corita Kent Bold Serigraph
-    # Massive multi-layered display title: "POWER & JOY"
-    # Magenta shadow pass
-    P.text((100 + dx * 2, 130 + dy * 2), "POWER & JOY", "din_bold", 112, INK_POP_MAGENTA, tracking=-2)
-    # Solid Squeegee Black top pass
-    P.text((100, 130), "POWER & JOY", "din_bold", 112, INK_SQUEEGEE_BLACK, tracking=-2)
+    # 5. Monumental Corita Kent / Push Pin Typography
+    # Massive title: "LOVE & REVOLT"
+    P.text((120 + dx * 2, 110 + dy * 2), "LOVE & REVOLT", "din_bold", 112, INK_POP_MAGENTA, tracking=-2)
+    P.text((120, 110), "LOVE & REVOLT", "din_bold", 112, INK_SQUEEGEE_BLACK, tracking=-2)
 
-    # Secondary Pop Kicker
-    P.text((105, 255), "ELECTRIC SERIGRAPHY // IMMACULATE HEART & PUSH PIN", "grotesk_bold", 24, INK_POP_CYAN, tracking=2)
+    # Kicker banner
+    P.text((125, 215), "ELECTRIC SERIGRAPHY // IMMACULATE HEART & PUSH PIN NYC", "grotesk_bold", 21, INK_POP_CYAN, tracking=2)
 
-    # Saturated Pop Banner across lower section
-    P.rect(90, 1140, 1110, 1270, INK_POP_YELLOW)
-    P.line([(90, 1140), (1110, 1140)], INK_SQUEEGEE_BLACK, w=3.0)
-    P.line([(90, 1270), (1110, 1270)], INK_SQUEEGEE_BLACK, w=3.0)
-    P.text((600, 1175), "ALL POWER TO THE IMAGINATION!", "din_bold", 54, INK_SQUEEGEE_BLACK, tracking=4, anchor_x="center")
+    # Lower proclaim banner
+    P.rect(120, 1140, 1080, 1260, INK_POP_YELLOW)
+    P.line([(120, 1140), (1080, 1140)], INK_SQUEEGEE_BLACK, w=3.0)
+    P.line([(120, 1260), (1080, 1260)], INK_SQUEEGEE_BLACK, w=3.0)
+    P.text((600, 1175), "DAMN EVERYTHING BUT THE CIRCUS!", "din_bold", 48, INK_SQUEEGEE_BLACK, tracking=4, anchor_x="center")
 
     # Accession metadata & Silkscreen workshop credits
-    P.text((90, 1340), "SERIGRAPH WORKSHOP NYC // FOUR-COLOR SPOT SCREENPRINT", "din_bold", 18, INK_SQUEEGEE_BLACK, tracking=2)
-    P.text((90, 1380), "HAND-PULLED ON 300GSM ARCHIVAL CARDSTOCK — LIMITED EDITION 250", "grotesk", 15, INK_POP_MAGENTA, tracking=1)
-    P.text((1110, 1380), "CORITA KENT & GLASER HOMAGE", "mono_bold", 14, INK_POP_CYAN, tracking=2, anchor_x="right")
+    P.text((120, 1330), "CORITA KENT & ANDY WARHOL HOMAGE // SCREENPRINT ON 300GSM BRISTOL", "din_bold", 17, INK_SQUEEGEE_BLACK, tracking=2)
+    P.text((120, 1370), "LIMITED EDITION 250 // HAND-PULLED SQUEEGEE OFFSET", "grotesk", 15, INK_POP_MAGENTA, tracking=1)
+    P.text((1080, 1370), "SERIGRAPH LAB NYC", "mono_bold", 14, INK_POP_CYAN, tracking=2, anchor_x="right")
 
-    # 4-color silkscreen registration crosshairs in margins
-    for rx, ry, col in [
-        (60, 60, INK_POP_MAGENTA),
-        (1140, 60, INK_POP_CYAN),
-        (60, 1540, INK_POP_YELLOW),
-        (1140, 1540, INK_SQUEEGEE_BLACK),
-    ]:
+    # Corner registration marks
+    for rx, ry, col in [(60, 60, INK_POP_MAGENTA), (1140, 60, INK_POP_CYAN), (60, 1540, INK_POP_YELLOW), (1140, 1540, INK_SQUEEGEE_BLACK)]:
         P.ring(rx, ry, 12, 1.2, col)
         P.line([(rx - 16, ry), (rx + 16, ry)], col, w=1.0)
         P.line([(rx, ry - 16), (rx, ry + 16)], col, w=1.0)
 
     def zm(dm):
-        dm.rectangle([90 * S, 120 * S, 1110 * S, 300 * S], fill=255)
-        dm.rectangle([160 * S, 320 * S, 1040 * S, 1080 * S], fill=255)
-        dm.rectangle([90 * S, 1120 * S, 1110 * S, 1420 * S], fill=255)
+        dm.rectangle([120 * S, 110 * S, 1080 * S, 240 * S], fill=255)
+        dm.rectangle([120 * S, 240 * S, 1080 * S, 1080 * S], fill=255)
+        dm.rectangle([120 * S, 1140 * S, 1080 * S, 1400 * S], fill=255)
     return P.finish(zmask=P.create_mask(zm), gate_range=(28, 48))
 
 
@@ -248,108 +274,79 @@ def poster_03_tokyo_riso():
     return P.finish(zmask=P.create_mask(zm), gate_range=(25, 45))
 
 
-# ==============================================================================
-# 04. CONSTRUCTIVIST AGIT-PROP
-# ==============================================================================
-# ==============================================================================
-# 04. CONSTRUCTIVIST AGIT-PROP
-# ==============================================================================
 def poster_04_constructivist():
     P = StylePoster(
         "04-constructivist-agit",
         "style_constructivist_agit",
         SUB_STRAW,
         [INK_AGIT_CARBON, INK_AGIT_VERMILION],
-        "agit|beat the whites with the red wedge|lissitzky 1919|vkhutemas",
+        "rodchenko_1924|lengiz_books|megaphone_soundwave|vkhutemas",
     )
 
-    # 1. Lissitzky Split Spatial Field: Deep Carbon Angular Void on the right
-    void_pts = [(440, 100), (1140, 100), (1140, 1140), (580, 1140)]
-    P.poly(void_pts, INK_AGIT_CARBON)
-
-    # 2. The Target White Sphere/Disc resting in the black void
-    cx, cy = 800, 620
-    cr = 270
-    P.ell(cx - cr, cy - cr, cx + cr, cy + cr, SUB_STRAW)
-    P.ring(cx, cy, 215, 3.5, INK_AGIT_CARBON)
-    P.ring(cx, cy, 145, 3.0, INK_AGIT_CARBON)
-    P.ring(cx, cy, 75, 2.5, INK_AGIT_CARBON)
-
-    # 3. The Acute Revolutionary Red Wedge
-    wedge_pts = [(50, 240), (840, 620), (70, 760)]
-    P.poly(wedge_pts, INK_AGIT_VERMILION)
-
-    # Full-span woodblock relief grain striations
-    for y in range(256, 750, 20):
-        x_left = 60 + int((y - 240) * 0.04)
-        if y <= 620:
-            x_right = int(50 + (y - 240) * 2.079)
-        else:
-            x_right = int(840 - (y - 620) * 5.5)
-        if x_right > x_left + 10:
-            P.line([(x_left + 6, y), (x_right - 6, y)], SUB_STRAW, w=1.8)
-
-    # 4. Cleavage Fracture: The wedge splits the white circle
-    crack_pts = [(cx, cy), (cx + 270, cy + 90), (cx + 250, cy + 220), (cx, cy)]
-    P.poly(crack_pts, INK_AGIT_CARBON)
-
-    displaced_pts = [
-        (cx + 30, cy + 40),
-        (cx + 290, cy + 130),
-        (cx + 260, cy + 280),
-        (cx + 40, cy + 270)
+    # 1. Shouting Face Silhouette at Left (homage to Lilya Brik in Lengiz poster)
+    shouter_pts = [
+        (60, 1120), (60, 620), (140, 580), (190, 540), (240, 510),
+        (280, 540), (270, 610), (220, 640),
+        # Mouth open wide shouting into cone
+        (250, 670), (180, 710), (250, 750),
+        # Jaw and neck
+        (220, 790), (180, 840), (190, 940), (220, 1040), (240, 1120)
     ]
-    P.poly(displaced_pts, SUB_STRAW)
-    P.line([(cx + 30, cy + 40), (cx + 290, cy + 130)], INK_AGIT_CARBON, w=4.0)
+    P.poly(shouter_pts, INK_AGIT_CARBON)
+    # Woodblock relief gouges on shouter
+    P.linocut_relief(shouter_pts, INK_AGIT_CARBON, SUB_STRAW, num_gouges=6)
 
-    shards = [
-        [(cx + 140, cy - 180), (cx + 220, cy - 240), (cx + 170, cy - 150)],
-        [(cx + 260, cy - 50), (cx + 340, cy - 30), (cx + 280, cy + 20)],
-        [(cx + 200, cy + 190), (cx + 290, cy + 250), (cx + 210, cy + 270)],
-        [(cx - 30, cy + 290), (cx + 50, cy + 360), (cx - 70, cy + 340)],
-    ]
-    for idx, sh in enumerate(shards):
-        c = INK_AGIT_VERMILION if idx % 2 == 0 else SUB_STRAW
-        P.poly(sh, c)
+    # 2. Diagonal Sonic Megaphone Expansion Cone (Radiating from mouth across page)
+    # Primary Vermilion Red outer expansion cone
+    cone_vermilion = [(250, 670), (1140, 140), (1140, 1080), (250, 750)]
+    P.poly(cone_vermilion, INK_AGIT_VERMILION)
 
-    # 5. Floating Malevich / Lissitzky Geometric Satellites
-    # Floating Red Square cleanly positioned between БЕЙ and the black void
-    P.rect(300, 95, 370, 165, INK_AGIT_VERMILION)
-    # Floating Straw Satellite in upper right black void (no text collision)
-    P.rect(1020, 220, 1080, 360, SUB_STRAW)
-    # Dynamic diagonal coordinate vector lines
-    P.line([(50, 240), (1140, 830)], INK_AGIT_CARBON, w=1.5)
-    P.line([(70, 760), (1140, 220)], INK_AGIT_VERMILION, w=1.5)
+    # Secondary Carbon Black inner soundwave sector
+    cone_black = [(340, 680), (1140, 360), (1140, 880), (340, 740)]
+    P.poly(cone_black, INK_AGIT_CARBON)
 
-    # 6. Typographic Forces
-    P.rotated_text((110, 350), "КЛИНОМ", "din_bold", 68, SUB_STRAW, angle_deg=22, tracking=4)
-    P.rotated_text((150, 470), "КРАСНЫМ", "din_bold", 68, SUB_STRAW, angle_deg=22, tracking=4)
+    # Central straw soundwave core
+    cone_straw = [(480, 690), (1140, 520), (1140, 720), (480, 730)]
+    P.poly(cone_straw, SUB_STRAW)
 
-    # 'БЕЙ' (BEAT) monumental black wood-type at the top left
-    P.text((60, 85), "БЕЙ", "din_bold", 124, INK_AGIT_CARBON, tracking=6)
-    # 'БЕЛЫХ' (THE WHITES) centered in upper black void
-    P.text((640, 130), "БЕЛЫХ", "din_bold", 84, SUB_STRAW, tracking=4)
+    # 3. Concentric Soundwave Arc Ribs across the megaphone
+    for r in [220, 380, 560, 760, 960]:
+        P.ring(250, 710, r, 3.5, SUB_STRAW)
 
-    # Rodchenko-style interlocking headline banners below
-    P.rect(60, 1170, 1140, 1285, INK_AGIT_CARBON)
-    P.text((600, 1195), "BEAT THE OLD WITH THE NEW!", "din_bold", 68, SUB_STRAW, tracking=5, anchor_x="center")
+    # 4. Diagonal Structural Girders & Tension Cables
+    P.line([(60, 240), (1140, 140)], INK_AGIT_CARBON, w=3.0)
+    P.line([(250, 670), (1140, 140)], INK_AGIT_CARBON, w=4.5)
+    P.line([(250, 750), (1140, 1080)], INK_AGIT_CARBON, w=4.5)
+    P.line([(60, 1120), (1140, 1080)], INK_AGIT_CARBON, w=3.0)
 
-    P.rect(60, 1285, 680, 1335, INK_AGIT_VERMILION)
-    P.text((80, 1298), "ALL POWER TO REVOLUTIONARY UTILITY", "din_bold", 19, SUB_STRAW, tracking=3)
+    # 5. Monumental Perspective Cyrillic Wood-Type
+    # 'КНИГИ' (BOOKS) bursting from the mouth of the cone
+    P.rotated_text((380, 580), "КНИГИ", "din_bold", 120, SUB_STRAW, angle_deg=-20, tracking=6)
 
-    # Constructed vector arrow polygons
-    for ax in [710, 730, 750]:
-        P.poly([(ax, 1300), (ax + 12, 1310), (ax, 1320)], INK_AGIT_CARBON)
+    # 'ПО ВСЕМ ОТРАСЛЯМ' (ON ALL BRANCHES)
+    P.rotated_text((480, 480), "ПО ВСЕМ ОТРАСЛЯМ", "din_bold", 38, INK_AGIT_CARBON, angle_deg=-20, tracking=4)
 
-    P.text((780, 1298), "VKHUTEMAS 1920", "din_bold", 20, INK_AGIT_CARBON, tracking=2)
+    # 'ЗНАНИЯ' (OF KNOWLEDGE) monumental vermilion callout in upper void
+    P.text((580, 80), "ЗНАНИЯ!", "din_bold", 96, INK_AGIT_VERMILION, tracking=6)
 
-    # Workshop Manifesto footer
-    P.text((60, 1360), "EL LISSITZKY & ALEXANDER RODCHENKO // SECTION 4 MOSCOW", "din", 17, INK_AGIT_CARBON, tracking=3)
-    P.text((60, 1395), "CONSTRUCTED OBJECTIVE FORM OVER INDIVIDUALIST DECORATION", "din_bold", 14, INK_AGIT_VERMILION, tracking=2)
-    P.line([(60, 1430), (1140, 1430)], INK_AGIT_CARBON, w=3.0)
+    # 6. Rodchenko Industrial Barricades at Bottom
+    P.rect(60, 1160, 1140, 1270, INK_AGIT_CARBON)
+    P.text((600, 1185), "ГОСИЗДАТ // ЛЕНГИЗ 1924", "din_bold", 62, SUB_STRAW, tracking=6, anchor_x="center")
+
+    P.rect(60, 1270, 740, 1320, INK_AGIT_VERMILION)
+    P.text((80, 1285), "ПРОИЗВОДСТВЕННОЕ ИСКУССТВО // РОДЧЕНКО", "din_bold", 18, SUB_STRAW, tracking=3)
+
+    for ax in [770, 790, 810]:
+        P.poly([(ax, 1285), (ax + 12, 1295), (ax, 1305)], INK_AGIT_CARBON)
+
+    P.text((840, 1285), "ВХУТЕМАС 1924", "din_bold", 19, INK_AGIT_CARBON, tracking=2)
+
+    P.text((60, 1350), "LILYA BRIK & ALEXANDER RODCHENKO // BOOKS ON ALL SUBJECTS", "din", 16, INK_AGIT_CARBON, tracking=2)
+    P.text((60, 1385), "AGITATIONAL STATE PUBLISHING HOUSE MOSCOW // LENINGRAD", "din_bold", 14, INK_AGIT_VERMILION, tracking=2)
+    P.line([(60, 1420), (1140, 1420)], INK_AGIT_CARBON, w=3.0)
 
     def zm(dm):
-        dm.rectangle([60 * S, 85 * S, 1140 * S, 1440 * S], fill=255)
+        dm.rectangle([60 * S, 80 * S, 1140 * S, 1420 * S], fill=255)
     return P.finish(zmask=P.create_mask(zm), gate_range=(20, 42))
 
 
@@ -810,12 +807,328 @@ def poster_10_braun_patent():
 
 
 # ==============================================================================
+# 11. JAPANESE SŌSAKU-HANGA (SHIKŌ MUNAKATA WOODCUT)
+# ==============================================================================
+def poster_11_sosaku_hanga():
+    P = StylePoster(
+        "11-sosaku-hanga-woodcut",
+        "style_sosaku_hanga",
+        SUB_WASHI,
+        [INK_SUMI, INK_CINNABAR, INK_AOMORI_INDIGO],
+        "shiko_munakata|sosaku_hanga|baren_relief|kozo_washi",
+    )
+    dx, dy = P.drift
+
+    # 1. Radiant Cinnabar Vermilion Solar Disc in background
+    P.ell(320, 240, 880, 800, INK_CINNABAR)
+
+    # 2. Dynamic Soaring Crane / Spirit Bird Woodblock Silhouette
+    bird_body = [
+        (600, 480), (680, 420), (740, 380), (820, 360), (780, 420),
+        (720, 480), (840, 520), (960, 560), (880, 600), (760, 620),
+        (700, 680), (720, 760), (660, 840), (580, 920), (520, 860),
+        (480, 760), (420, 680), (320, 640), (220, 620), (340, 560),
+        (460, 540), (520, 500)
+    ]
+    P.poly(bird_body, INK_SUMI)
+    # Hand-carved linocut relief feather gouges
+    P.linocut_relief(bird_body, INK_SUMI, SUB_WASHI, num_gouges=10)
+
+    # Indigo pine bough silhouette in foreground
+    pine_pts = [
+        (120, 1080), (240, 980), (380, 940), (460, 980), (340, 1020),
+        (260, 1050), (120, 1080)
+    ]
+    P.poly(pine_pts, INK_AOMORI_INDIGO)
+
+    # 3. Baren Circular Impression Textures (Uneven woodblock hand-rubbing)
+    for br in [140, 280, 420, 560]:
+        P.ring(600 + dx, 520 + dy, br, 1.5, INK_SUMI)
+
+    # 4. Red Artist Hanko Seals (Cinnabar Vermilion Stamping)
+    P.rect(940, 960, 1040, 1060, INK_CINNABAR)
+    P.rect(948, 968, 1032, 1052, SUB_WASHI)
+    P.line([(960, 985), (1020, 985)], INK_CINNABAR, w=2.5)
+    P.line([(960, 1035), (1020, 1035)], INK_CINNABAR, w=2.5)
+    P.line([(990, 975), (990, 1045)], INK_CINNABAR, w=2.5)
+    P.text((962, 995), "MUNA", "din_bold", 18, INK_CINNABAR, tracking=2)
+
+    P.ell(955, 1080, 1025, 1140, INK_CINNABAR)
+    P.text((968, 1098), "KATA", "mono_bold", 14, SUB_WASHI, tracking=1)
+
+    # 5. Woodcut Calligraphic Display Typography
+    P.text((120, 110), "SŌSAKU-HANGA", "din_bold", 104, INK_SUMI, tracking=4)
+    P.text((125, 220), "AOMORI WOODCUT ARCHIVE // SHIKŌ MUNAKATA & ONCHI", "din_bold", 21, INK_CINNABAR, tracking=3)
+
+    # Woodcut vertical index strip
+    P.rect(120, 360, 180, 680, INK_SUMI)
+    P.text((135, 380), "P", "din_bold", 32, SUB_WASHI)
+    P.text((135, 430), "R", "din_bold", 32, SUB_WASHI)
+    P.text((135, 480), "I", "din_bold", 32, SUB_WASHI)
+    P.text((135, 530), "N", "din_bold", 32, SUB_WASHI)
+    P.text((135, 580), "T", "din_bold", 32, SUB_WASHI)
+    P.text((135, 630), "S", "din_bold", 32, SUB_WASHI)
+
+    # Lower Exhibition Imprint
+    P.line([(120, 1200), (1080, 1200)], INK_SUMI, w=3.0)
+    P.text((120, 1230), "SHIKŌ MUNAKATA & KŌSHIRŌ ONCHI // WOODCUT PRINTS 1935-1958", "din_bold", 22, INK_SUMI, tracking=2)
+    P.text((120, 1270), "HAND-PULLED ON RAW KOZO FIBER ECHIZEN WASHI WITH SUMI AND CINNABAR", "grotesk", 15, INK_AOMORI_INDIGO, tracking=1)
+    P.text((120, 1310), "NATIONAL MUSEUM OF MODERN ART TOKYO // FOLK CRAFT PAVILION", "grotesk", 15, INK_SUMI, tracking=1)
+    P.line([(120, 1350), (1080, 1350)], INK_CINNABAR, w=1.5)
+
+    def zm(dm):
+        dm.rectangle([120 * S, 120 * S, 1080 * S, 1350 * S], fill=255)
+    return P.finish(zmask=P.create_mask(zm), gate_range=(30, 50))
+
+
+# ==============================================================================
+# 12. 1980s SWISS CYBER NEW WAVE (WEINGART & GREIMAN HYBRID TYPOGRAPHY)
+# ==============================================================================
+def poster_12_swiss_cyber():
+    P = StylePoster(
+        "12-swiss-cyber-newwave",
+        "style_swiss_cyber",
+        SUB_KROMEKOTE,
+        [INK_LASER_CYAN, INK_ACID_CHARTREUSE, INK_NEON_MAGENTA, INK_CYBER_BLACK],
+        "april_greiman|wolfgang_weingart|new_wave|bitmapped_mac_1986",
+    )
+    dx, dy = P.drift
+
+    # 1. Saturated Acid Chartreuse Angular Ground Plane
+    plane_pts = [(100, 360), (1100, 240), (1040, 980), (80, 1060)]
+    P.poly(plane_pts, INK_ACID_CHARTREUSE)
+
+    # 2. Offset CMYK Halftone Rosettes (Duxt multi-angle screening)
+    P.cmyk_rosette_field(
+        180, 380, 1000, 920, pitch=18,
+        cmyk_fn=lambda x, y: (
+            0.5 + 0.4 * math.sin(x / 90),
+            0.4 + 0.5 * math.cos(y / 90),
+            0.6,
+            0.2 + 0.2 * math.sin((x + y) / 120)
+        ),
+        c_ink=INK_LASER_CYAN,
+        m_ink=INK_NEON_MAGENTA,
+        y_ink=INK_ACID_CHARTREUSE,
+        k_ink=INK_CYBER_BLACK,
+    )
+
+    # 3. 72-dpi Bitmapped Mac 128k Floating Isometric Wireframe Cube
+    cube_front = [(420, 520), (740, 520), (740, 840), (420, 840)]
+    cube_top = [(420, 520), (560, 400), (880, 400), (740, 520)]
+    cube_side = [(740, 520), (880, 400), (880, 720), (740, 840)]
+
+    P.poly(cube_top, INK_LASER_CYAN)
+    P.poly(cube_side, INK_NEON_MAGENTA)
+    P.poly(cube_front, INK_CYBER_BLACK)
+
+    for p_pts in [cube_front, cube_top, cube_side]:
+        for i in range(len(p_pts)):
+            P.line([p_pts[i], p_pts[(i + 1) % len(p_pts)]], SUB_KROMEKOTE, w=2.0)
+
+    # 4. CRT Video Scanlines with Horizontal Jitter (Duxt scanlines)
+    P.scanlines(80, 240, 1100, 1060, INK_CYBER_BLACK, period=6, depth=0.35, aberration=3, jitter=1.5)
+
+    # 5. Weingart Spaced Typographic Hierarchy & New Wave Punctuation
+    P.text((90, 120), "DOES IT MAKE SENSE?", "din_bold", 88, INK_CYBER_BLACK, tracking=8)
+    P.text((95, 220), "CALARTS // HYBRID IMAGERY // BASEL NEW WAVE 1986", "mono_bold", 20, INK_NEON_MAGENTA, tracking=3)
+
+    # Floating punctuation cluster
+    P.text((1020, 110), "?", "din_bold", 96, INK_LASER_CYAN)
+    P.text((80, 1100), "*** // 72 DPI BITMAP VIDEO FRAME", "mono_bold", 18, INK_CYBER_BLACK, tracking=4)
+
+    # Lower Technical Column Band
+    P.rect(80, 1150, 1120, 1260, INK_CYBER_BLACK)
+    P.text((110, 1185), "APRIL GREIMAN & WOLFGANG WEINGART", "din_bold", 36, INK_ACID_CHARTREUSE, tracking=3)
+    P.text((110, 1225), "SPACE COLLAGE OVERPRINT // SYNTHETIC KROMEKOTE SHEET", "mono", 14, INK_LASER_CYAN, tracking=2)
+
+    P.text((80, 1310), "DIGITAL COLLISION: POSTSCRIPT FONTS + VIDEO STILLS + CMYK FILM OFFSET", "din", 16, INK_CYBER_BLACK, tracking=2)
+    P.text((80, 1345), "PRINTED IN LOS ANGELES // ISSUE #76 PACIFIC WAVE ARCHIVE", "mono", 14, INK_NEON_MAGENTA, tracking=1)
+
+    def zm(dm):
+        dm.rectangle([80 * S, 110 * S, 1120 * S, 1360 * S], fill=255)
+    return P.finish(zmask=P.create_mask(zm), gate_range=(25, 45))
+
+
+# ==============================================================================
+# 13. 1950s BLUE NOTE HARD BOP (REID MILES / FRANCIS WOLFF)
+# ==============================================================================
+def poster_13_blue_note():
+    P = StylePoster(
+        "13-blue-note-hardbop",
+        "style_blue_note",
+        SUB_ALBUM_JACKET,
+        [INK_VELVET_BLACK, INK_BLUE_NOTE_OCHRE],
+        "reid_miles|francis_wolff|blue_note_4003|hard_bop_jazz",
+    )
+    dx, dy = P.drift
+
+    # 1. Saturated Blue Note Ochre Header Block
+    P.rect(80, 80, 1120, 290, INK_BLUE_NOTE_OCHRE)
+
+    # 2. Severe Asymmetric Crop: Tenor Saxophone & Jazz Musician Silhouette on Right Side
+    sax_body = [
+        (640, 480), (740, 420), (840, 420), (960, 520), (1080, 680),
+        (1120, 820), (1120, 1520), (560, 1520), (560, 1280), (620, 980),
+        (600, 780), (640, 580)
+    ]
+    P.poly(sax_body, INK_VELVET_BLACK)
+
+    # 45-degree photographic halftone grain field across the bell of the horn
+    P.rotated_halftone(
+        620, 600, 1100, 1300, 18, 45,
+        lambda x, y: 0.15 + 0.65 * math.sin((x - y) / 120) ** 2,
+        INK_VELVET_BLACK,
+        shape="circle",
+        drift=(dx, dy),
+    )
+
+    # Metallic highlights on horn
+    P.line([(680, 680), (880, 860)], SUB_ALBUM_JACKET, w=3.5)
+    P.line([(740, 780), (1020, 980)], INK_BLUE_NOTE_OCHRE, w=2.5)
+
+    # 3. Typography
+    P.text((110, 110), "SONNY ROLLINS", "grotesk_bold", 96, INK_VELVET_BLACK, tracking=-2)
+    P.text((115, 230), "WYNTON KELLY / DOUG WATKINS / PHILLY JOE JONES", "din_bold", 21, SUB_ALBUM_JACKET, tracking=2)
+
+    P.text((110, 360), "NEWK'S", "din_bold", 136, INK_VELVET_BLACK, tracking=-3)
+    P.text((110, 500), "TIME", "din_bold", 136, INK_VELVET_BLACK, tracking=-3)
+
+    P.rect(880, 105, 1090, 175, INK_VELVET_BLACK)
+    P.text((905, 118), "BLUE NOTE", "din_bold", 20, SUB_ALBUM_JACKET, tracking=2)
+    P.text((905, 145), "BLP 4003", "din_bold", 20, INK_BLUE_NOTE_OCHRE, tracking=3)
+
+    P.text((110, 680), "TUNE UP", "din_bold", 20, INK_BLUE_NOTE_OCHRE, tracking=2)
+    P.text((110, 715), "ASIATIC RAES", "din_bold", 20, INK_VELVET_BLACK, tracking=2)
+    P.text((110, 750), "WONDERFUL! WONDERFUL!", "din_bold", 20, INK_VELVET_BLACK, tracking=2)
+    P.text((110, 785), "THE SURREY WITH THE FRINGE ON TOP", "din_bold", 20, INK_VELVET_BLACK, tracking=2)
+
+    P.text((110, 1460), "BLUE NOTE RECORDS // 47 WEST 63RD ST. // NEW YORK 23", "din_bold", 17, INK_VELVET_BLACK, tracking=2)
+    P.text((1090, 1460), "HIGH FIDELITY", "mono_bold", 15, SUB_ALBUM_JACKET, tracking=2, anchor_x="right")
+
+    def zm(dm):
+        dm.rectangle([80 * S, 80 * S, 1120 * S, 1480 * S], fill=255)
+    return P.finish(zmask=P.create_mask(zm), gate_range=(20, 42))
+
+
+# ==============================================================================
+# 14. BAUHAUS PHOTOGRAM & TYPOFOTO (LÁSZLÓ MOHOLY-NAGY 1925)
+# ==============================================================================
+def poster_14_bauhaus_typofoto():
+    P = StylePoster(
+        "14-bauhaus-typofoto",
+        "style_bauhaus_typofoto",
+        SUB_BROMO_CHLORIDE,
+        [INK_EMULSION_BLACK, INK_BAUHAUS_RED],
+        "moholy_nagy|typofoto|dessau_bauhaus_1925|rayogram_exposure",
+    )
+    dx, dy = P.drift
+
+    # 1. Dark Silver Emulsion Background Field (Photographic darkroom exposure)
+    P.rect(100, 180, 1100, 1180, INK_EMULSION_BLACK)
+
+    # 2. Optical Photogram Luminescence: Negative glass lenses & wire springs
+    # Main circular lens shadow (negative white exposure in black ground)
+    P.ell(280, 360, 880, 960, SUB_BROMO_CHLORIDE)
+    # Inner refraction rings
+    for r in [260, 220, 170, 110, 60]:
+        P.ring(580, 660, r, 2.5, INK_EMULSION_BLACK)
+
+    # Spiral spring wire photogram
+    pts_spiral = []
+    for deg in range(0, 720, 10):
+        rad = math.radians(deg)
+        r = 40 + deg * 0.35
+        pts_spiral.append((580 + math.cos(rad) * r, 660 + math.sin(rad) * r))
+    for i in range(len(pts_spiral) - 1):
+        P.line([pts_spiral[i], pts_spiral[i + 1]], INK_EMULSION_BLACK, w=3.0)
+
+    # Geometric glass prism (Equilateral triangle)
+    prism_pts = [(420, 880), (840, 880), (630, 480)]
+    P.poly(prism_pts, SUB_BROMO_CHLORIDE)
+    P.line([(420, 880), (840, 880)], INK_BAUHAUS_RED, w=4.5)
+    P.line([(840, 880), (630, 480)], INK_BAUHAUS_RED, w=4.5)
+    P.line([(630, 480), (420, 880)], INK_BAUHAUS_RED, w=4.5)
+
+    # 3. Dynamic Bauhaus Signal Red Vector Ray
+    P.line([(100, 180), (1100, 1180)], INK_BAUHAUS_RED, w=3.5)
+    P.dot(630, 480, 22, INK_BAUHAUS_RED)
+
+    # 4. Herbert Bayer Universal Typofoto Typography (Stark lowercase sans)
+    P.text((100, 90), "bauhaus typofoto", "din_bold", 78, INK_EMULSION_BLACK, tracking=2)
+    P.text((105, 170), "moholy-nagy // dessau bauhaus 1925 // typographie + fotografie", "din_bold", 18, INK_BAUHAUS_RED, tracking=2)
+
+    # Callout annotations along orthographic grid
+    P.text((140, 1220), "MALEREI FOTOGRAFIE FILM // BAND 8 DER BAUHAUSBÜCHER", "din_bold", 20, INK_EMULSION_BLACK, tracking=2)
+    P.text((140, 1255), "LICHT ALS GESTALTUNGSMATERIAL — DIREKTE BELICHTUNG OHNE KAMERA", "grotesk", 15, INK_EMULSION_BLACK, tracking=1)
+    P.text((140, 1285), "VERLAG ALBERT LANGEN // MÜNCHEN 1925", "grotesk", 14, INK_BAUHAUS_RED, tracking=1)
+
+    P.line([(100, 1330), (1100, 1330)], INK_EMULSION_BLACK, w=2.0)
+
+    def zm(dm):
+        dm.rectangle([100 * S, 90 * S, 1100 * S, 1330 * S], fill=255)
+    return P.finish(zmask=P.create_mask(zm), gate_range=(35, 55))
+
+
+# ==============================================================================
+# 15. 1970s POLISH POSTER SCHOOL SURREALISM (JAN LENICA WOZZECK)
+# ==============================================================================
+def poster_15_polish_surrealism():
+    P = StylePoster(
+        "15-polish-surrealism",
+        "style_polish_surrealism",
+        SUB_POLISH_OFFSET,
+        [INK_GOUACHE_CHARCOAL, INK_POISON_OLIVE, INK_CRIMSON_RUST],
+        "jan_lenica|polish_poster_school|wozzeck_1964|teatr_wielki",
+    )
+    dx, dy = P.drift
+
+    # 1. Expressive Poison Olive Biological Contour Background
+    P.ell(180, 260, 1020, 1100, INK_POISON_OLIVE)
+
+    # 2. Concentric Grotesque Anatomical Rings (Jan Lenica Wozzeck motif)
+    for r in [380, 320, 260, 200, 140, 80]:
+        col = INK_CRIMSON_RUST if (r // 60) % 2 == 0 else INK_GOUACHE_CHARCOAL
+        P.ring(600, 680, r, 24.0, col)
+
+    # Center screaming core
+    P.ell(520, 600, 680, 760, INK_GOUACHE_CHARCOAL)
+    P.ell(550, 630, 650, 730, SUB_POLISH_OFFSET)
+    P.dot(600, 680, 25, INK_CRIMSON_RUST)
+
+    # Hand-carved organic relief lines across the surrealist head
+    head_poly = [
+        (220, 1060), (280, 840), (220, 640), (320, 420), (520, 280),
+        (680, 280), (880, 420), (980, 640), (920, 840), (980, 1060)
+    ]
+    for i in range(len(head_poly)):
+        P.line([head_poly[i], head_poly[(i + 1) % len(head_poly)]], INK_GOUACHE_CHARCOAL, w=6.0)
+
+    # 3. Raw Painterly Brush Display Lettering
+    P.text((600, 110), "WOZZECK", "din_bold", 124, INK_GOUACHE_CHARCOAL, tracking=4, anchor_x="center")
+    P.text((600, 220), "OPERA W 3 AKTACH // ALBAN BERG", "din_bold", 26, INK_CRIMSON_RUST, tracking=3, anchor_x="center")
+
+    # Lower Theatrical Imprint
+    P.rect(120, 1160, 1080, 1270, INK_GOUACHE_CHARCOAL)
+    P.text((600, 1185), "TEATR WIELKI W WARSZAWIE", "din_bold", 48, SUB_POLISH_OFFSET, tracking=5, anchor_x="center")
+
+    P.text((120, 1310), "REŻYSERIA: JAN LENICA // KIEROWNICTWO MUZYCZNE: BOHDAN WODICZKO", "din_bold", 17, INK_GOUACHE_CHARCOAL, tracking=1)
+    P.text((120, 1345), "POLISH POSTER SCHOOL ARCHIVE // WARSZAWA 1964 // WYDAWNICTWO ARTYSTYCZNO-GRAFICZNE", "grotesk", 14, INK_POISON_OLIVE, tracking=1)
+    P.line([(120, 1380), (1080, 1380)], INK_CRIMSON_RUST, w=2.5)
+
+    def zm(dm):
+        dm.rectangle([120 * S, 110 * S, 1080 * S, 1380 * S], fill=255)
+    return P.finish(zmask=P.create_mask(zm), gate_range=(28, 48))
+
+
+# ==============================================================================
 # MASTER RUNNER & CONTACT SHEET COMPOSITOR
 # ==============================================================================
 def create_contact_sheet(results, out_path="styles_contact_sheet.png"):
-    """Assemble all 10 posters into a high-resolution 5x2 contact sheet."""
+    """Assemble all posters into a high-resolution 5-column contact sheet."""
     thumb_w, thumb_h = 300, 400
-    cols, rows = 5, 2
+    cols = 5
+    rows = (len(results) + cols - 1) // cols
     pad_x = 24
     pad_y = 65
     sheet_w = cols * thumb_w + (cols + 1) * pad_x
@@ -823,15 +1136,14 @@ def create_contact_sheet(results, out_path="styles_contact_sheet.png"):
 
     sheet = Image.new("RGB", (sheet_w, sheet_h), (0x12, 0x12, 0x14))
     sd = ImageDraw.Draw(sheet)
-    # load_font multiplies by S=2, so size_1x must be halved for 1x canvas
     f_title = load_font("din_bold", 11)
     f_sub = load_font("mono", 6)
     f_name = load_font("din_bold", 6.5)
     f_stat = load_font("mono", 5.5)
 
     # Master Header
-    sd.text((pad_x, 24), "10 MATERIAL-DRIVEN SYSTEMATIC DESIGN STYLES — MASTER AUDIT", font=f_title, fill=(0xF4, 0xF4, 0xF2))
-    sd.text((pad_x, 56), "DETERMINISTIC VECTOR RENDERING // SUBSTRATE PHYSICS // REPRODUCIBLE SEED ENGINES", font=f_sub, fill=(0x88, 0x88, 0x86))
+    sd.text((pad_x, 24), f"{len(results)} MATERIAL-DRIVEN SYSTEMATIC DESIGN STYLES — MASTER AUDIT", font=f_title, fill=(0xF4, 0xF4, 0xF2))
+    sd.text((pad_x, 56), "DETERMINISTIC VECTOR RENDERING // SUBSTRATE PHYSICS // DUXT HALFTONES // REPRODUCIBLE SEED ENGINES", font=f_sub, fill=(0x88, 0x88, 0x86))
 
     for idx, r in enumerate(results):
         c = idx % cols
@@ -869,10 +1181,15 @@ if __name__ == "__main__":
         poster_08_punk_xerox,
         poster_09_de_stijl_rietveld,
         poster_10_braun_patent,
+        poster_11_sosaku_hanga,
+        poster_12_swiss_cyber,
+        poster_13_blue_note,
+        poster_14_bauhaus_typofoto,
+        poster_15_polish_surrealism,
     ]
 
     print("================================================================================")
-    print("           RENDERING 10 SYSTEMATIC MATERIAL-DRIVEN POSTERS                      ")
+    print("           RENDERING 15 SYSTEMATIC MATERIAL-DRIVEN POSTERS                      ")
     print("================================================================================")
     print(f"{'#':2} {'Slug':30} {'Style ID':28} {'Zone%':>6} {'Gate':>9} {'Status':>6}")
     print("-" * 84)
@@ -887,4 +1204,4 @@ if __name__ == "__main__":
 
     print("-" * 84)
     create_contact_sheet(results)
-    print("All 10 styles rendered deterministically and verified against gates.")
+    print("All 15 styles rendered deterministically and verified against gates.")
