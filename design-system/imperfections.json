@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "imperfections": [
+    {
+      "id": "imperfection_metal_type_bite",
+      "style": "style_zurich_modernism",
+      "name": "Metal Type Edge Bite",
+      "mechanism": "Heavy cylinder letterpress pressure squashes viscous black ink outwards around letterform perimeters.",
+      "range": "0.3mm to 0.7mm micro-ridge",
+      "target_plates": ["dominant_black"]
+    },
+    {
+      "id": "imperfection_register_cross_drift",
+      "style": "style_zurich_modernism",
+      "name": "Film-Stripping Register Drift",
+      "mechanism": "Secondary spot red plate misaligns slightly from the black structural grid.",
+      "range": "0.2mm to 0.6mm offset",
+      "target_plates": ["accent_spot"]
+    },
+    {
+      "id": "imperfection_squeegee_mesh_drag",
+      "style": "style_pop_art_serigraphy",
+      "name": "Silkscreen Squeegee Mesh Drag",
+      "mechanism": "Manual rubber squeegee pressure pulls liquid acrylic pigment across mesh threads, leaving subtle edge drag lines and ink bead ridges.",
+      "range": "0.5mm to 1.5mm squeegee pressure ridge",
+      "target_plates": ["all_plates"]
+    },
+    {
+      "id": "imperfection_screen_misregistration_2mm",
+      "style": "style_pop_art_serigraphy",
+      "name": "Hand-Pulled Screen Misregistration",
+      "mechanism": "Wood screen frames shift slightly on table hinges, causing 1.5mm to 3mm registration gaps and accidental fluorescent overprint overlaps.",
+      "range": "1.5mm to 3.0mm color shift",
+      "target_plates": ["accent_plates"]
+    },
+    {
+      "id": "imperfection_drum_roller_marks",
+      "style": "style_tokyo_riso_lab",
+      "name": "Risograph Rubber Roller Drag",
+      "mechanism": "Friction paper feed wheels leave faint longitudinal carbon/pink pickup tracks along central axis.",
+      "range": "faint 10-15% opacity double stripes",
+      "target_plates": ["accent_plates"]
+    },
+    {
+      "id": "imperfection_plate_misregistration_3mm",
+      "style": "style_tokyo_riso_lab",
+      "name": "High-Speed Drum Misregistration",
+      "mechanism": "Successive drum passes rotate and shift mechanically by up to 3mm, revealing raw paper gaps and overprint overlaps.",
+      "range": "1.0mm to 3.0mm translational shift, 0.5 to 1.5 deg rotational tilt",
+      "target_plates": ["accent_plates"]
+    },
+    {
+      "id": "imperfection_woodblock_grain_voids",
+      "style": "style_constructivist_agit",
+      "name": "Wood Plank Grain Voids",
+      "mechanism": "Coarse pearwood grain absorbs less ink in annular rings, leaving white striations across large black/red solids.",
+      "range": "subtle woodgrain relief voids",
+      "target_plates": ["solid_wedges"]
+    },
+    {
+      "id": "imperfection_ink_roller_starvation",
+      "style": "style_constructivist_agit",
+      "name": "Letterpress Roller Ink Starvation",
+      "mechanism": "Hand brayer roller exhausts ink towards the bottom of massive display letters, causing dry-brush stipple.",
+      "range": "density falls from 100% to 75% at baseline",
+      "target_plates": ["wood_type"]
+    },
+    {
+      "id": "imperfection_matrix_dot_bleed",
+      "style": "style_dutch_matrix_modernism",
+      "name": "Offset Litho Matrix Dot Gain",
+      "mechanism": "High-pressure offset cylinder slightly expands matrix grid dots by 4% on cast-coated board.",
+      "range": "0.05mm micro dot gain",
+      "target_plates": ["matrix_dots"]
+    },
+    {
+      "id": "imperfection_plate_shift_0_5mm",
+      "style": "style_dutch_matrix_modernism",
+      "name": "Crouwel 45-Degree Plate Misregistration",
+      "mechanism": "Secondary flame vermilion plate shifts 0.4mm along the 45-degree isometric vector.",
+      "range": "0.3mm to 0.6mm offset",
+      "target_plates": ["accent_plate"]
+    },
+    {
+      "id": "imperfection_thermal_head_burnout",
+      "style": "style_thermal_fax_brutalism",
+      "name": "Thermal Element Burnout Line",
+      "mechanism": "A single failed thermal resistor dot on the print head leaves a continuous blank white hairline along paper feed direction.",
+      "range": "1px continuous white line at x=random(200..1000)",
+      "target_plates": ["all_plates"]
+    },
+    {
+      "id": "imperfection_scanline_jitter",
+      "style": "style_thermal_fax_brutalism",
+      "name": "Fax Stepper Motor Feed Jitter",
+      "mechanism": "Rubber platen roller slips momentarily, compressing or expanding horizontal scanline pitch by 15%.",
+      "range": "intermittent horizontal band displacement",
+      "target_plates": ["dither_zones"]
+    },
+    {
+      "id": "imperfection_intaglio_plate_deboss",
+      "style": "style_victorian_chromolitho",
+      "name": "Copperplate Embossed Border Indentation",
+      "mechanism": "Intense rolling-press pressure forces the beveled metal plate edge into damp rag paper, creating a debossed groove.",
+      "range": "2mm wide 3D embossed border bevel",
+      "target_plates": ["substrate"]
+    },
+    {
+      "id": "imperfection_hand_wash_overspill",
+      "style": "style_victorian_chromolitho",
+      "name": "Artisan Watercolor Wash Overspill",
+      "mechanism": "Hand-applied botanical tint washes slightly exceed the engraved copperplate contour line.",
+      "range": "0.5mm to 1.5mm loose tint bleed",
+      "target_plates": ["color_washes"]
+    },
+    {
+      "id": "imperfection_toner_drum_scratch",
+      "style": "style_punk_xerox_ransom",
+      "name": "Photocopier Drum Longitudinal Scratch",
+      "mechanism": "Scratched OPC photosensitive drum deposits a persistent faint vertical black toner hairline from top to bottom.",
+      "range": "1-2 vertical broken hairlines across canvas",
+      "target_plates": ["toner"]
+    },
+    {
+      "id": "imperfection_copier_skew_2deg",
+      "style": "style_punk_xerox_ransom",
+      "name": "Manual Flatbed Document Feed Skew",
+      "mechanism": "Original paste-up sheet laid by hand on scanner glass at a hasty 1.5-degree angle.",
+      "range": "0.8 to 2.2 degree overall composition rotation",
+      "target_plates": ["pasted_tiles"]
+    },
+    {
+      "id": "imperfection_linocut_ink_bleed",
+      "style": "style_de_stijl_rietveld",
+      "name": "Letterpress Roller Ink Bleed",
+      "mechanism": "Heavy oil-based primary inks squash slightly past the metal type rules under heavy platen impression onto fibrous pressboard.",
+      "range": "0.2mm to 0.5mm edge squash",
+      "target_plates": ["primary_planes"]
+    },
+    {
+      "id": "imperfection_letterpress_platen_impression",
+      "style": "style_de_stijl_rietveld",
+      "name": "Platen Impression Indentation",
+      "mechanism": "Hard typographic blocks leave visible physical deboss impression in unbleached structural pressboard fibers.",
+      "range": "micro-emboss tactile shadow",
+      "target_plates": ["all_plates"]
+    },
+    {
+      "id": "imperfection_plotter_pen_dwell",
+      "style": "style_braun_patent_schematic",
+      "name": "Technical Pen Dwell Dots",
+      "mechanism": "Drafting pen momentarily pauses before lifting at vector vertices, leaving a tiny saturated capillary ink bead.",
+      "range": "0.4mm to 0.8mm circular dwell bead at vector joints",
+      "target_plates": ["linework"]
+    },
+    {
+      "id": "imperfection_drafting_ruler_smudge",
+      "style": "style_braun_patent_schematic",
+      "name": "Draftsman Ruler Under-Edge Smudge",
+      "mechanism": "Wet ink creeps under the bevel of an acrylic drafting triangle when moved too quickly across vellum.",
+      "range": "subtle friction smear along 1 rule segment",
+      "target_plates": ["dimension_rules"]
+    }
+  ]
+}

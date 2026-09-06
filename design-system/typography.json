@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "type_roles": [
+    {
+      "id": "type_zurich_grotesk",
+      "style": "style_zurich_modernism",
+      "display_font": "Helvetica / Akzidenz-Grotesk Bold",
+      "support_font": "Helvetica Regular",
+      "scale_jump": "8:1 to 12:1",
+      "tracking": 0,
+      "leading": "tight, 1.05 to 1.1x font size",
+      "case": "strictly lowercase or disciplined sentence case for titles; uppercase reserved for institutional initials",
+      "rules": "Flush left, ragged right; no hyphenation; zero decorative letterspacing."
+    },
+    {
+      "id": "type_pop_serigraphy_bold",
+      "style": "style_pop_art_serigraphy",
+      "display_font": "Push Pin Display / Baby Teeth / Cooper Black Grotesk",
+      "support_font": "Heavy Pop Sans / Condensed Stencil",
+      "scale_jump": "8:1 to 14:1",
+      "tracking": 1,
+      "leading": "punchy tight, 0.95 to 1.05x font size",
+      "case": "Uppercase joyful slogans; multi-colored overlapping letterforms",
+      "rules": "Vibrant silkscreen color fills with solid contour outlines; slight registration offset traps."
+    },
+    {
+      "id": "type_riso_bilingual_grotesk",
+      "style": "style_tokyo_riso_lab",
+      "display_font": "Heavy Condensed Japanese/Latin Grotesk",
+      "support_font": "Monospace Stamp / Dot Matrix",
+      "scale_jump": "7:1 to 12:1",
+      "tracking": -1,
+      "leading": "solid, 0.98x font size",
+      "case": "Uppercase heavy display; bilingual Japanese katakana/kanji sub-kicker",
+      "rules": "Interlocking caps with occasional vertical 90-degree Japanese text strip; rubber-stamp run numbers."
+    },
+    {
+      "id": "type_agit_wood_slab",
+      "style": "style_constructivist_agit",
+      "display_font": "Monumental Geometric Slab / Wood Grotesk",
+      "support_font": "Compressed Heavy Gothic",
+      "scale_jump": "10:1 to 16:1",
+      "tracking": 2,
+      "leading": "compact, 0.95x font size",
+      "case": "Massive uppercase declarations",
+      "rules": "Type runs along 45-degree diagonal wedges; massive punctuation bars and exclamation marks."
+    },
+    {
+      "id": "type_dutch_constructed_matrix",
+      "style": "style_dutch_matrix_modernism",
+      "display_font": "Constructed Modular Matrix Display / Helvetica Bold",
+      "support_font": "Helvetica / DIN Tabular Monospace",
+      "scale_jump": "8:1 to 14:1",
+      "tracking": 0,
+      "leading": "tight architectural, 0.95 to 1.05x font size",
+      "case": "Heavy uppercase constructed architectural display; lowercase tabular metadata",
+      "rules": "Type aligns strictly to the 45-degree or 57-degree matrix grid; letters form architectural rectangular blocks."
+    },
+    {
+      "id": "type_teletext_ocr_mono",
+      "style": "style_thermal_fax_brutalism",
+      "display_font": "OCR-A / 8-Bit Bitmap Monospace",
+      "support_font": "Fixed-Width Courier / Terminal Grid",
+      "scale_jump": "4:1 to 8:1",
+      "tracking": 1,
+      "leading": "fixed character cell grid (1.0x)",
+      "case": "Monospace uppercase ASCII headers; raw terminal hex data streams",
+      "rules": "Strict adherence to fixed character width cell grid; box-drawing ASCII delimiters."
+    },
+    {
+      "id": "type_victorian_copperplate_italic",
+      "style": "style_victorian_chromolitho",
+      "display_font": "Hand-Engraved Copperplate Script / Didone Serif",
+      "support_font": "Linnaean Latin Italic Serif",
+      "scale_jump": "6:1 to 11:1",
+      "tracking": 4,
+      "leading": "classical, 1.25x font size",
+      "case": "Small caps heading; Latin binomial scientific naming (Genus capitalized, species italic lowercase)",
+      "rules": "Roman numeral plate designations in corners (TAB. VII); anatomical dissection index letters."
+    },
+    {
+      "id": "type_punk_ransom_typewriter",
+      "style": "style_punk_xerox_ransom",
+      "display_font": "Cutout Newspaper Ransom Letterforms",
+      "support_font": "Mechanical Clogged-Ribbon Typewriter / Dymo Embossing Tape",
+      "scale_jump": "8:1 to 15:1",
+      "tracking": 0,
+      "leading": "irregular, individual letters jitter vertically",
+      "case": "Chaotic mixed case cutouts glued onto black paper slips",
+      "rules": "Letters tilt irregularly (-5 to +5 deg); white paper border around individual cutout letter tiles."
+    },
+    {
+      "id": "type_de_stijl_modular_block",
+      "style": "style_de_stijl_rietveld",
+      "display_font": "Theo van Doesburg Modular Rectangular Sans",
+      "support_font": "Geometric Monospace / Pure Grotesk",
+      "scale_jump": "7:1 to 12:1",
+      "tracking": 2,
+      "leading": "strict orthogonal, 1.1x font size",
+      "case": "Strictly uppercase constructed rectangular characters; zero curves allowed",
+      "rules": "Asymmetric margin lockup; perpendicular vertical baseline text strips along margin axes."
+    },
+    {
+      "id": "type_patent_din_spec",
+      "style": "style_braun_patent_schematic",
+      "display_font": "DIN 1451 Mittelschrift",
+      "support_font": "DIN 1451 Engschrift / Technical Monospace",
+      "scale_jump": "5:1 to 9:1",
+      "tracking": 2,
+      "leading": "standardized technical, 1.15x font size",
+      "case": "Uppercase figure titles ('FIG. 1', 'SECTION A-A'); lowercase component specification notes",
+      "rules": "Circled reference callout numerals ('12', '14a') anchored with 45-degree arrow leaders."
+    }
+  ]
+}

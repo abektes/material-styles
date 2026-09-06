@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "compositions": [
+    {
+      "id": "comp_modular_din_grid",
+      "style": "style_zurich_modernism",
+      "name": "Harmonic Acoustic Arcs & 45° DIN Tension",
+      "empty_paper_percent": [35, 55],
+      "dominant_subject_percent": [50, 75],
+      "anchors": ["concentric_arcs", "diagonal_45_axis"],
+      "rule": "Josef Müller-Brockmann concentric acoustic arcs in Fibonacci progression; 45-degree diagonal axes intersecting horizontal DIN grid columns."
+    },
+    {
+      "id": "comp_pop_serigraphy_collision",
+      "style": "style_pop_art_serigraphy",
+      "name": "Pop Silhouette Collision & Ben-Day Screen",
+      "empty_paper_percent": [28, 48],
+      "dominant_subject_percent": [55, 78],
+      "anchors": ["center_pop_silhouette", "benday_halftone_field"],
+      "rule": "Vibrant flat silkscreen silhouette colliding with 45-degree Ben-Day screen dot field; exuberant Push Pin display lettering."
+    },
+    {
+      "id": "comp_overprint_rosette_collision",
+      "style": "style_tokyo_riso_lab",
+      "name": "Overprint Drum Collision",
+      "empty_paper_percent": [25, 45],
+      "dominant_subject_percent": [60, 78],
+      "anchors": ["diagonal_stagger", "edge_bleed"],
+      "rule": "Plates intentionally overlap; intersection zone generates third optical multiply color."
+    },
+    {
+      "id": "comp_dynamic_wedge_thrust",
+      "style": "style_constructivist_agit",
+      "name": "Shattered Target Wedge & Barricade",
+      "empty_paper_percent": [20, 42],
+      "dominant_subject_percent": [65, 85],
+      "anchors": ["diagonal_45", "shattered_target_center"],
+      "rule": "El Lissitzky acute 45-degree wedge shattering a circular target field into vector shards; interlocking slanted typographic banners."
+    },
+    {
+      "id": "comp_isometric_matrix_grid",
+      "style": "style_dutch_matrix_modernism",
+      "name": "Crouwel Isometric Stepped Matrix",
+      "empty_paper_percent": [35, 50],
+      "dominant_subject_percent": [55, 75],
+      "anchors": ["isometric_57_grid", "stepped_diagonal_corner"],
+      "rule": "Strict 45/57-degree isometric matrix grid; stepped diagonal blocks; constructed architectural display sans with micro tabular metadata."
+    },
+    {
+      "id": "comp_teletext_terminal_feed",
+      "style": "style_thermal_fax_brutalism",
+      "name": "Continuous Teletext Transaction Stream",
+      "empty_paper_percent": [30, 50],
+      "dominant_subject_percent": [50, 70],
+      "anchors": ["top_tear_edge", "left_character_cell"],
+      "rule": "Monospace character cells and 1-bit dithered image blocks bounded by ASCII rule dividers."
+    },
+    {
+      "id": "comp_central_anatomical_specimen",
+      "style": "style_victorian_chromolitho",
+      "name": "Central Anatomical Intaglio Plate",
+      "empty_paper_percent": [38, 56],
+      "dominant_subject_percent": [50, 68],
+      "anchors": ["geometric_center", "cardinal_plate_mark"],
+      "rule": "Subject sits strictly within an intaglio plate deboss rectangle; copperplate headings at top, Latin classification at bottom."
+    },
+    {
+      "id": "comp_ransom_headline_barricade",
+      "style": "style_punk_xerox_ransom",
+      "name": "Ransom Barricade & Degraded Portrait",
+      "empty_paper_percent": [22, 45],
+      "dominant_subject_percent": [60, 80],
+      "anchors": ["slanted_baseline", "cut_edge_shadow"],
+      "rule": "Spliced newsprint headline tiles across degraded high-contrast photocopied hero graphic."
+    },
+    {
+      "id": "comp_axonometric_rietveld_chair",
+      "style": "style_de_stijl_rietveld",
+      "name": "Axonometric Rietveld Chair & Neoplastic Grid",
+      "empty_paper_percent": [38, 58],
+      "dominant_subject_percent": [50, 72],
+      "anchors": ["isometric_chair_core", "orthogonal_cartesian_lines"],
+      "rule": "Axonometric spatial projection of Gerrit Rietveld's Red and Blue Chair with yellow-capped rail terminals; asymmetric Mondrian grid coordinates."
+    },
+    {
+      "id": "comp_axonometric_exploded_view",
+      "style": "style_braun_patent_schematic",
+      "name": "Isometric Technical Exploded View",
+      "empty_paper_percent": [32, 52],
+      "dominant_subject_percent": [50, 70],
+      "anchors": ["isometric_30_grid", "right_specification_column"],
+      "rule": "Subject rendered in precise isometric line weights with numbered leader callouts and tabular spec legend."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "substrates": [
+    {
+      "id": "substrate_coated_artboard",
+      "name": "Zurich Coated Matte Artboard",
+      "hex": "#F5F5F3",
+      "rgb": [245, 245, 243],
+      "finish": "matte unvarnished smooth",
+      "associated_styles": ["style_zurich_modernism"]
+    },
+    {
+      "id": "substrate_pop_cardstock",
+      "name": "Bright Bleached Silkscreen Cardstock",
+      "hex": "#FAF8F5",
+      "rgb": [250, 248, 245],
+      "finish": "heavy smooth bright white silkscreen poster stock",
+      "associated_styles": ["style_pop_art_serigraphy"]
+    },
+    {
+      "id": "substrate_cream_vellum",
+      "name": "Tokyo Uncoated Cream Vellum",
+      "hex": "#FCFAF2",
+      "rgb": [252, 250, 242],
+      "finish": "high-bulk open-tooth book stock",
+      "associated_styles": ["style_tokyo_riso_lab"]
+    },
+    {
+      "id": "substrate_straw_newsprint",
+      "name": "Raw Straw Newsprint / Kraft",
+      "hex": "#EAE3D2",
+      "rgb": [234, 227, 210],
+      "finish": "rough unbleached mechanical wood pulp",
+      "associated_styles": ["style_constructivist_agit"]
+    },
+    {
+      "id": "substrate_dutch_cast_coated",
+      "name": "Cast-Coated Brilliant White Board",
+      "hex": "#F4F5F7",
+      "rgb": [244, 245, 247],
+      "finish": "ultra-smooth high-density cast-coated board",
+      "associated_styles": ["style_dutch_matrix_modernism"]
+    },
+    {
+      "id": "substrate_thermal_roll",
+      "name": "Point-of-Sale Chemical Thermal Roll",
+      "hex": "#ECE8DC",
+      "rgb": [236, 232, 220],
+      "finish": "slick chemical leuco dye surface",
+      "associated_styles": ["style_thermal_fax_brutalism"]
+    },
+    {
+      "id": "substrate_linen_vellum",
+      "name": "Linnaean Linen Rag Vellum",
+      "hex": "#F5EFE1",
+      "rgb": [245, 239, 225],
+      "finish": "dense archival calendered rag",
+      "associated_styles": ["style_victorian_chromolitho"]
+    },
+    {
+      "id": "substrate_bond_copy",
+      "name": "70gsm Office Utility Bond",
+      "hex": "#EDECE8",
+      "rgb": [237, 236, 232],
+      "finish": "utilitarian chalky electrostatic paper",
+      "associated_styles": ["style_punk_xerox_ransom"]
+    },
+    {
+      "id": "substrate_unbleached_pressboard",
+      "name": "Dutch Unbleached Pressboard / Canvas",
+      "hex": "#F5F3EB",
+      "rgb": [245, 243, 235],
+      "finish": "calendered organic unbleached structural pressboard",
+      "associated_styles": ["style_de_stijl_rietveld"]
+    },
+    {
+      "id": "substrate_metric_drafting",
+      "name": "Orthographic Blueprint Drafting Grid",
+      "hex": "#F8F8F6",
+      "rgb": [248, 248, 246],
+      "finish": "translucent technical vellum with subtle grid",
+      "associated_styles": ["style_braun_patent_schematic"]
+    }
+  ],
+  "inks": [
+    {"id": "ink_zurich_black", "name": "Akzidenz Pitch Black", "hex": "#111111", "rgb": [17, 17, 17], "type": "opaque_process"},
+    {"id": "ink_swiss_signal_red", "name": "Swiss Signal Red", "hex": "#E53935", "rgb": [229, 57, 53], "type": "opaque_spot"},
+    {"id": "ink_zurich_blue", "name": "Zurich Ultramarine", "hex": "#1565C0", "rgb": [21, 101, 192], "type": "opaque_spot"},
+    {"id": "ink_pop_magenta", "name": "Hot Pop Magenta", "hex": "#E6007A", "rgb": [230, 0, 122], "type": "saturated_screenprint_pigment"},
+    {"id": "ink_pop_yellow", "name": "Sunshine Pop Yellow", "hex": "#FFDE00", "rgb": [255, 222, 0], "type": "saturated_screenprint_pigment"},
+    {"id": "ink_pop_cyan", "name": "Pop Cerulean Cyan", "hex": "#009FE3", "rgb": [0, 159, 227], "type": "saturated_screenprint_pigment"},
+    {"id": "ink_squeegee_black", "name": "Squeegee Carbon Black", "hex": "#18181A", "rgb": [24, 24, 26], "type": "heavy_silkscreen_ink"},
+    {"id": "ink_riso_fluo_pink", "name": "Riso Fluorescent Pink", "hex": "#FF4098", "rgb": [255, 64, 152], "type": "transparent_soy"},
+    {"id": "ink_riso_aqua", "name": "Riso Aqua Teal", "hex": "#00A4D3", "rgb": [0, 164, 211], "type": "transparent_soy"},
+    {"id": "ink_riso_carbon", "name": "Riso Flat Carbon", "hex": "#2B2A29", "rgb": [43, 42, 41], "type": "semi_transparent_soy"},
+    {"id": "ink_agit_carbon", "name": "Industrial Carbon Letterpress", "hex": "#1A1918", "rgb": [26, 25, 24], "type": "heavy_oil_letterpress"},
+    {"id": "ink_agit_vermilion", "name": "Revolutionary Vermilion", "hex": "#D72626", "rgb": [215, 38, 38], "type": "heavy_oil_letterpress"},
+    {"id": "ink_dutch_ultramarine", "name": "Dutch Cobalt Ultramarine", "hex": "#17369B", "rgb": [23, 54, 155], "type": "opaque_process"},
+    {"id": "ink_flame_orange", "name": "Flame Vermilion / Orange", "hex": "#F04D23", "rgb": [240, 77, 35], "type": "opaque_spot"},
+    {"id": "ink_thermal_black", "name": "Thermal Carbon Reaction", "hex": "#1C1B1A", "rgb": [28, 27, 26], "type": "1bit_heat_reaction"},
+    {"id": "ink_engravers_bitumen", "name": "Deep Engraver's Bitumen", "hex": "#2C2523", "rgb": [44, 37, 35], "type": "intaglio_viscous"},
+    {"id": "ink_mineral_indigo", "name": "Copperplate Mineral Indigo", "hex": "#25405A", "rgb": [37, 64, 90], "type": "intaglio_viscous"},
+    {"id": "ink_burnt_umber", "name": "Burnt Umber Ochre", "hex": "#8A5636", "rgb": [138, 86, 54], "type": "mineral_wash"},
+    {"id": "ink_copier_toner", "name": "Electrostatic Carbon Toner", "hex": "#181818", "rgb": [24, 24, 24], "type": "fused_resin_toner"},
+    {"id": "ink_acid_lemon", "name": "Day-Glo Acid Lemon", "hex": "#E6FF00", "rgb": [230, 255, 0], "type": "fluorescent_sticker_tipin"},
+    {"id": "ink_destijl_red", "name": "Primary Cadmium Red", "hex": "#D32F2F", "rgb": [211, 47, 47], "type": "opaque_lacquer_pigment"},
+    {"id": "ink_destijl_blue", "name": "Primary Cobalt Blue", "hex": "#19398A", "rgb": [25, 57, 138], "type": "opaque_lacquer_pigment"},
+    {"id": "ink_destijl_yellow", "name": "Primary Chrome Yellow", "hex": "#F9C80E", "rgb": [249, 200, 14], "type": "opaque_lacquer_pigment"},
+    {"id": "ink_destijl_black", "name": "De Stijl Bone Black", "hex": "#141414", "rgb": [20, 20, 20], "type": "deep_bone_black"},
+    {"id": "ink_india_technical", "name": "Technical Drawing India Ink", "hex": "#1C1D1F", "rgb": [28, 29, 31], "type": "rotring_liquid_ink"},
+    {"id": "ink_bauhaus_yellow", "name": "Industrial Bauhaus Yellow", "hex": "#F5A623", "rgb": [245, 166, 35], "type": "signal_spot"}
+  ],
+  "palettes": [
+    {"id": "palette_zurich_red_black", "style": "style_zurich_modernism", "dominant": "ink_zurich_black", "accent": "ink_swiss_signal_red", "mode": "2-plate spot"},
+    {"id": "palette_pop_serigraphy", "style": "style_pop_art_serigraphy", "plates": ["ink_pop_magenta", "ink_pop_yellow", "ink_pop_cyan", "ink_squeegee_black"], "mode": "4-plate silkscreen spot"},
+    {"id": "palette_riso_pink_aqua_carbon", "style": "style_tokyo_riso_lab", "plates": ["ink_riso_fluo_pink", "ink_riso_aqua", "ink_riso_carbon"], "mode": "3-plate subtractive overprint"},
+    {"id": "palette_agit_vermilion_carbon", "style": "style_constructivist_agit", "dominant": "ink_agit_carbon", "accent": "ink_agit_vermilion", "mode": "dual letterpress"},
+    {"id": "palette_dutch_matrix", "style": "style_dutch_matrix_modernism", "dominant": "ink_dutch_ultramarine", "accent": "ink_flame_orange", "mode": "2-plate isometric spot"},
+    {"id": "palette_thermal_carbon", "style": "style_thermal_fax_brutalism", "dominant": "ink_thermal_black", "mode": "pure 1-bit binary"},
+    {"id": "palette_naturalist_triad", "style": "style_victorian_chromolitho", "plates": ["ink_engravers_bitumen", "ink_mineral_indigo", "ink_burnt_umber"], "mode": "3-plate chromolithograph"},
+    {"id": "palette_toner_acid_lemon", "style": "style_punk_xerox_ransom", "dominant": "ink_copier_toner", "accent": "ink_acid_lemon", "mode": "high-contrast xerox + day-glo"},
+    {"id": "palette_de_stijl_primary", "style": "style_de_stijl_rietveld", "plates": ["ink_destijl_red", "ink_destijl_blue", "ink_destijl_yellow", "ink_destijl_black"], "mode": "neoplastic primary separation"},
+    {"id": "palette_patent_india_yellow", "style": "style_braun_patent_schematic", "dominant": "ink_india_technical", "accent": "ink_bauhaus_yellow", "mode": "technical dual-pen"}
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "visual_tensions": [
+    {
+      "id": "tension_rigorous",
+      "name": "Rigorous / Objective",
+      "use_for": ["style_zurich_modernism", "style_braun_patent_schematic"],
+      "description": "Grid-locked, mathematically balanced, unyielding alignment, zero accidental drift."
+    },
+    {
+      "id": "tension_contemplative",
+      "name": "Contemplative / Atmospheric",
+      "use_for": ["style_cyanotype_heliography", "style_wabi_sabi_mokuhanga", "style_victorian_chromolitho"],
+      "description": "Expansive negative space, suspended solitary subjects, unhurried reading cadence."
+    },
+    {
+      "id": "tension_vibrant_collision",
+      "name": "Vibrant Overprint Collision",
+      "use_for": ["style_tokyo_riso_lab", "style_solarized_chemigram"],
+      "description": "Plates collide and overlap, unexpected chromatic reactions, controlled visual density."
+    },
+    {
+      "id": "tension_kinetic_agit",
+      "name": "Kinetic Agitation / Force Vector",
+      "use_for": ["style_constructivist_agit", "style_punk_xerox_ransom"],
+      "description": "High directional velocity, diagonal wedges, aggressive contrast, anti-establishment rupture."
+    },
+    {
+      "id": "tension_raw_stream",
+      "name": "Raw Serial Stream",
+      "use_for": ["style_thermal_fax_brutalism"],
+      "description": "Continuous telemetry, uncurated data stream, mechanical relentless progression."
+    }
+  ],
+  "focal_events": [
+    {"id": "event_monolithic_headline_knockout", "description": "Display phrase knocks out a solid structural block."},
+    {"id": "event_subtractive_multiply_intersection", "description": "Two translucent ink shapes intersect to form a third darker optical color."},
+    {"id": "event_diagonal_wedge_severing_frame", "description": "A 45-degree acute angle wedge divides the canvas into dynamic force fields."},
+    {"id": "event_isolated_specimen_orbit", "description": "One hero specimen suspended in profound negative space surrounded by micro-accessions."},
+    {"id": "event_1bit_dither_gradient_burst", "description": "Photographic subject dissolves into a mathematical Floyd-Steinberg pixel constellation."},
+    {"id": "event_intaglio_crosshatch_density", "description": "Hyper-dense copperplate engraving lines pooling into velvety black shadow."}
+  ]
+}
