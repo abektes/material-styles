@@ -1,141 +1,107 @@
-# Material Styles — 15 Systematic Physical Design Systems
+# mono-color gallery — 10 deterministic examples
 
-[![Skill: material-styles](https://img.shields.io/badge/skill-material--styles-black?style=flat-square)](SKILL.md)
-[![Status: Verified 15/15](https://img.shields.io/badge/audit-15%2F15%20PASS-success?style=flat-square)](STYLES-GUIDE.md)
-[![Reproducibility: SHA--256 Identical](https://img.shields.io/badge/dual--pass-SHA--256%20identical-blue?style=flat-square)](material_styles/audit.py)
-[![Tests: Pytest Passing](https://img.shields.io/badge/tests-34%20passed-success?style=flat-square)](tests/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg?style=flat-square)](LICENSE)
+Ten posters generated with the [mono-color skill](https://github.com/yanliudesign/mono-color-skill)'s
+design system, rendered as code instead of AI image prompts. Each poster resolves a
+full Recipe Manifest from the skill's `design-system/*.json` catalogs and is drawn by
+`render_gallery.py` + `monolib.py` (Python/PIL, no randomness beyond the seeded
+imperfections). **Re-running the script reproduces every PNG byte-for-byte** (verified:
+two consecutive runs produce identical SHA-256 hashes for all ten files).
 
-An extensible AI agent skill and modular physical design engine inspired by and expanding upon [mono-color-skill](https://github.com/yanliudesign/mono-color-skill).
+The skill's numeric gates were checked programmatically for every poster: empty paper
+(measured as canvas minus composed-content silhouettes) within the global 25–55% band
+*and* its composition family's dominance band, accent-ink share 15–30% of printed ink,
+dominant plate 70–85%, and the family's type scale ratio. `zone%` below is the
+silhouette-based empty-paper measure; `px%` is raw non-substrate pixels, reported for
+reference. A visual QA pass (three independent reviewers) passed all ten.
 
-Instead of treating design styles as arbitrary prompt adjectives ("ultra-detailed", "retro", "aesthetic"), this system models **physical reproduction mechanics**:
-$$\text{Substrate Chemistry} + \text{Plate Separations} + \text{Reproduction Engine} + \text{Typographic Hierarchy} + \text{Seeded Imperfections}$$
+| # | file | subject / phrase | family | mode · inks | type | zone% | family band |
+|---|------|------------------|--------|-------------|------|-------|-------------|
+| 01 | `01-fern-archive.png` | fern · "the archive of green" | archival plate | duotone · Botanical Green `#008A4B` + Oxblood `#8F3434` on Pale Beige | Literary serif + mono plate data | 54.1 | 40–55 ✓ |
+| 02 | `02-night-market.png` | night market · "lanterns lit at dusk" | object field | duotone · Tangerine `#E46C2D` + Slate Blue `#4773A5` on White | Cultural Grotesk + mono | 49.8 | 25–50 ✓ |
+| 03 | `03-midnight-ride.png` | night ride · "MIDNIGHT RIDE" | ruled information | duotone · Ultramarine `#263E99` + Safety Orange `#E55D2B` on White | Condensed Civic + mono facts | 51.6 | 35–55 ✓ |
+| 04 | `04-still-steaming.png` | tea · "still steaming" | editorial journal | **pure one-ink** · Terracotta `#C65F38` on Pale Beige | Literary serif + mono | 42.2 | 35–55 ✓ |
+| 05 | `05-harbour-gull.png` | harbour gull · "NO RENT" | image field | duotone · Charcoal `#30343A` + Signal Red `#C83232` on Cool Gray | Rotated-free serif display + mono | 34.0 | 20–40 ✓ |
+| 06 | `06-sound-check.png` | sound check · "SOUND CHECK" | overprint collage | **overprint duotone** · Electric Blue `#173AE3` × Carbon `#242321` on White | Cultural Grotesk interlocked caps | 39.0 | 20–40 ✓ |
+| 07 | `07-paper-keeps.png` | keeping things · "PAPER KEEPS THINGS" | type-led declaration | duotone · Mint `#5EB783` + Charcoal `#302D2E` on Cool Gray | Typographic Object serif, page-filling | 30.2 | 20–45 ✓ |
+| 08 | `08-the-pool.png` | public pool · "THE POOL IS OPEN" | editorial cover | duotone · Powder Blue `#9EB8D3` + Signal Red `#C83232` on White | wide grotesk + mono | 25.6 | 25–45 ✓ |
+| 09 | `09-night-log.png` | moon phases · "three moods of the same light" | specimen annotation | **pure one-ink** · Aubergine `#63365F` on Pale Beige | Literary serif + mono labels | 54.5 | 35–55 ✓ |
+| 10 | `10-the-long-way.png` | summer walk · "walk until the town ends" | editorial cover | **pure one-ink** · Royal Blue `#2058D4` on White | Literary serif + mono km marks | 39.2 | 25–45 ✓ |
 
----
+Across the set: all 9 layout families (image field ×2), 12 of the catalog's palettes,
+4 type roles, both one-ink and all four two-ink modes' plate logic, all three
+substrates, and 0–2 controlled imperfections per poster (stable md5 seed per recipe;
+registration drift on accent plates, halftone/density jitter, pale second impressions
+in one-ink work).
 
-## Master Audit Contact Sheet
+## Print-logic features demonstrated
 
-![15 Material-Driven Systematic Design Styles — Master Contact Sheet](styles_contact_sheet.png)
+- **Plate knockouts** — headline channels cut through the fern plate frame (01),
+  the lighthouse-style channel (04), white type where SOUND CHECK crosses the blue ring (06),
+  title knocked out where the road passes under it (10).
+- **Paper as a shape** — the gull's white head is exposed substrate on the gray page (05);
+  stripe bands and mullions are paper, not white ink.
+- **Halftone reproduction** — screened seas, pools, suns, steam and sky haze with
+  cataloged 7% dot jitter; ink density pooling to solid at depth.
+- **Overprint physics** — 06's overlap zone is the multiply of the two inks, not a third color.
+- **Registration drift** — accent plates offset ~1.5 mm (02, 03, 08); in one-ink posters
+  drift appears only as a pale second impression of the same ink (04 title, 09 crescent).
 
----
+## Motion showreel
 
-## The 15 Physical Design Systems
+`reel/mono-color-reel.mp4` — 44s · 1920×1080 · 30fps · silent · 10.8MB
 
-All 15 posters are implemented as modular plugins in `material_styles/styles/` and verified to be **100% byte-for-byte reproducible** (identical SHA-256 hashes across consecutive runs):
+The story: **a phantom print shop runs one job through the machine.** Paper loads
+and the registration cross draws on (`TWO INKS. ONE SHEET.` stamps in, the three
+substrates wipe through as swatch bars), the 15-ink catalog rises with staggered
+overshoot, then ten "plates" flash-cut through — each poster stamps in with a plate
+flash and hard ink-bar wipe, its phrase wipes in word by word, and a motion motif
+drawn from its own visual DNA plays under the type (leaflets rain, lanterns rise,
+the wheel spins, steam drifts, the beak slices, two rings overprint with a true
+multiply zone, the marquee slides, ropes and float drift, the crescent rotates,
+the road dashes scroll while the km counter runs down). The full run tiles into a
+gallery wall with settle-overshoot, and the job ends on a charcoal slate — a mint
+channel sweeps through `MONO-COLOR` (the lighthouse headline's move, in motion)
+above a scrolling ticker of the ten recipe seeds: *same seed → same pixels*.
 
-| # | Poster File | Style Name | Substrate | Spot Pigments & Inks | Reproductive System | Zone% | Gate Range | Gate Status |
-|---|-------------|------------|-----------|----------------------|---------------------|:-----:|:----------:|:-----------:|
-| **01** | [`01-zurich-modernism.png`](styles_gallery/01-zurich-modernism.png) | Zurich Concrete Modernism | Coated Artboard `#F5F5F3` | Pitch Black `#111111` + Signal Red `#E53935` | Concentric harmonic acoustic arcs + Fibonacci grid | 52.7% | 35–55% | **PASS ✓** |
-| **02** | [`02-pop-art-serigraphy.png`](styles_gallery/02-pop-art-serigraphy.png) | 1960s Pop Art Serigraphy | Bleached Cardstock `#FAF8F5` | Pop Magenta `#E6007A`, Yellow `#FFDE00`, Cyan, Black | Multi-angle Ben-Day screens (15°/75°) + double-exposed muse | 38.4% | 28–48% | **PASS ✓** |
-| **03** | [`03-tokyo-riso-lab.png`](styles_gallery/03-tokyo-riso-lab.png) | Tokyo Riso Lab | Cream Vellum `#FCFAF2` | Fluo Pink `#FF4098` + Aqua `#00A4D3` + Carbon | 60-lpi drum screen + optical multiply overprints | 34.0% | 25–45% | **PASS ✓** |
-| **04** | [`04-constructivist-agit.png`](styles_gallery/04-constructivist-agit.png) | Constructivist Agit-Prop | Straw Newsprint `#EAE3D2` | Carbon Black `#1A1918` + Vermilion Red `#D72626` | Shouting megaphone silhouette, linocut relief, Cyrillic wood-type | 24.6% | 20–42% | **PASS ✓** |
-| **05** | [`05-dutch-matrix-modernism.png`](styles_gallery/05-dutch-matrix-modernism.png)| Dutch Matrix Modernism | Cast-Coated Board `#F4F5F7`| Cobalt Ultramarine `#17369B` + Flame Orange `#F04D23`| 57° isometric stepped diagonal matrix grid | 37.0% | 35–55% | **PASS ✓** |
-| **06** | [`06-thermal-fax-brutalism.png`](styles_gallery/06-thermal-fax-brutalism.png) | Low-Fi Thermal Fax | Thermal Roll `#ECE8DC` | Single-Pass Thermal Black `#1C1B1A` | Pure 1-bit Bayer matrix dithering (no gray pixels) | 40.3% | 30–50% | **PASS ✓** |
-| **07** | [`07-victorian-chromolitho.png`](styles_gallery/07-victorian-chromolitho.png) | Victorian Chromolitho | Linen Vellum `#F5EFE1` | Bitumen `#2C2523` + Indigo `#25405A` + Umber | Intaglio plate deboss + fine copperplate crosshatching | 39.4% | 38–56% | **PASS ✓** |
-| **08** | [`08-punk-xerox-ransom.png`](styles_gallery/08-punk-xerox-ransom.png) | 1977 Punk Zine & Xerox | Bond Copy `#EDECE8` | Electrostatic Toner `#181818` + Day-Glo Lemon | High-contrast blown-out photocopy + ransom blocks | 30.7% | 22–45% | **PASS ✓** |
-| **09** | [`09-de-stijl-rietveld.png`](styles_gallery/09-de-stijl-rietveld.png) | De Stijl Neoplasticism | Dutch Pressboard `#F5F3EB` | Primary Red `#D32F2F` + Blue `#19398A` + Yellow + Black| Axonometric Rietveld chair + Mondrian Cartesian grid | 47.3% | 38–58% | **PASS ✓** |
-| **10** | [`10-braun-patent-schematic.png`](styles_gallery/10-braun-patent-schematic.png) | Braun Industrial Patent | Drafting Grid `#F8F8F6` | India Ink `#1C1D1F` + Bauhaus Yellow `#F5A623` | ISO line-weight hierarchy + exploded isometric assembly| 42.3% | 32–52% | **PASS ✓** |
-| **11** | [`11-sosaku-hanga-woodcut.png`](styles_gallery/11-sosaku-hanga-woodcut.png) | Japanese Sōsaku-Hanga Woodcut | Echizen Washi `#F3EFE6` | Sumi Soot `#1E1C1A` + Cinnabar Vermilion `#C8382B` | Linocut relief crane + baren rubbing ink starvation | 38.4% | 30–50% | **PASS ✓** |
-| **12** | [`12-swiss-cyber-newwave.png`](styles_gallery/12-swiss-cyber-newwave.png) | 1980s Swiss Cyber New Wave | Kromekote Gloss `#F8F8FC` | Laser Cyan `#00E5FF` + Acid Chartreuse + Magenta + Dark | 3D wireframe cube + CMYK rosettes + scanlines | 32.2% | 25–45% | **PASS ✓** |
-| **13** | [`13-blue-note-hardbop.png`](styles_gallery/13-blue-note-hardbop.png) | 1950s Blue Note Hard Bop | LP Jacket Board `#F7F5EE` | Velvet Gravure Black `#101012` + Cadmium Ochre `#E09B19` | 45° Francis Wolff halftone saxophone crop + wood-type | 24.2% | 20–42% | **PASS ✓** |
-| **14** | [`14-bauhaus-typofoto.png`](styles_gallery/14-bauhaus-typofoto.png) | Bauhaus Photogram & Typofoto | Darkroom Stock `#EDE8DF` | Silver Gelatin Black `#141416` + Bayer Red `#E02E1B` | Camereless optical photogram + constructivist red ray | 35.2% | 35–55% | **PASS ✓** |
-| **15** | [`15-polish-surrealism.png`](styles_gallery/15-polish-surrealism.png) | Polish Poster School Surrealism | Warsaw Offset `#EBE3D0` | Poison Olive `#4D592B` + Crimson Rust + Charcoal | Visceral biological paper-cut silhouette + concentric rings | 36.4% | 28–48% | **PASS ✓** |
+Everything is drawn frame-by-frame in code (`reel/render_reel.py`, PIL + ffmpeg) —
+no video editor, no generative imagery. A job-ticket bar and plate counter run
+through the whole reel; the corner registration mark drifts per chapter
+(misregistration as a motif). Re-running the script reproduces the video
+deterministically.
 
----
+## Files
 
-## Installation & CLI Usage
+- `reel/mono-color-reel.mp4` — the showreel (`reel/render_reel.py` regenerates it)
+- `gallery/*.png` — the ten posters (1200×1600, 3:4)
+- `contact-sheet.png` — all ten at thumbnail scale
+- `render_gallery.py` — the ten recipes; `python render_gallery.py` regenerates everything
+- `monolib.py` — rendering engine (poster canvas, plates, masks, halftone, type, gestures, metrics)
+- `render_poster.py`, `lighthouse-monocolor.png`, `PROMPT.md` — the original single-poster experiment
 
-### Installation
-```bash
-git clone https://github.com/abektes/material-styles.git
-cd material-styles
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -e .[test]
-```
-
-### CLI Commands
-
-```bash
-# 1. List all available styles, lineages, and empty paper gates
-material-styles list
-
-# 2. Render any poster with custom text & titles
-material-styles render --style 02 --headline "FUTURE VISIONS" --subhead "BERLIN AVANT-GARDE 2026" -o custom_poster.png
-
-# 3. Scaffold a new physical style module
-material-styles new-style "Memphis Group 1981" --id style_memphis_81
-
-# 4. Audit empty paper gates and byte-for-byte SHA-256 determinism
-material-styles audit
-
-# 5. Batch render the complete gallery and master contact sheet
-material-styles gallery
-```
-
----
-
-## Python API Usage
-
-Use `material-styles` directly in your Python applications and generative pipelines:
-
-```python
-from material_styles import render_poster, list_styles
-
-# List all loaded styles
-for style in list_styles():
-    print(style.metadata.number, style.metadata.name)
-
-# Programmatically generate an editorial poster
-result = render_poster(
-    style=2,  # or "style_pop_art_serigraphy"
-    headline="LOVE & REVOLT",
-    subhead="SUMMER BENEFIT CONCERT 2026",
-    output="my_pop_poster.png"
-)
-print(f"Rendered: {result['path']} | Empty Paper: {result['zempty']:.1f}%")
-```
+Known limitation: DejaVu fonts stand in for the editorial serif/grotesk/mono voices
+(no font files in this environment); the catalogs' type *roles* are followed, the exact
+letterforms are not.
 
 ---
 
-## Contributing New Directions
+## Origins: the mono-color experiment + motion showreel
 
-We encourage designers and developers to contribute new physical directions!
-Please see [**`CONTRIBUTING.md`**](CONTRIBUTING.md) for the 5-step guide on:
-1. Scaffolding with `material-styles new-style`.
-2. Defining substrate chemistry and spot pigments.
-3. Implementing physical print mechanics.
-4. Passing automated empty paper gates.
-5. Opening a Pull Request.
+This project began as a deterministic renderer for the
+[mono-color skill](https://github.com/yanliudesign/mono-color-skill) before it grew
+into the 15-style material engine above. The original artifacts remain:
 
----
-
-## AI Agent Integration
-
-Reference `SKILL.md` directly. Any AI assistant (Claude Code, Google Antigravity, OpenAgentSkill, Cursor, Codex) can load `SKILL.md` to:
-- Resolve design briefs into the **Universal Recipe Manifest**.
-- Generate 5-paragraph production prompts for Midjourney, Flux, Imagen, or SDXL.
-- Write and execute deterministic Python vector render scripts.
-
----
-
-## Repository Structure
-
-- [`LICENSE`](LICENSE): Open source MIT License.
-- [`SKILL.md`](SKILL.md): Master AI agent skill instructions and compiler rules.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md): Guide for third-party contributors creating new directions.
-- [`STYLES-GUIDE.md`](STYLES-GUIDE.md): Exhaustive design guide, visual references, and historical lineages.
-- [`design-system/`](design-system/): Machine-readable catalogs for styles, colors, compositions, typography, rhythm, and imperfections.
-- [`material_styles/`](material_styles/): Modern modular Python package:
-  - `core/`: Canvas supersampling, rotated halftones, CMYK rosettes, linocut relief, scanlines, typography auto-fitting.
-  - `styles/`: Self-contained `BaseStyle` modules (`s01` to `s15`) + `custom/` plugin directory.
-  - `registry.py`: Dynamic style discovery engine.
-  - `scaffold.py`: Boilerplate generator for new directions.
-  - `audit.py`: Automated gate and SHA-256 determinism verifier.
-  - `cli.py`: Unified CLI (`list`, `render`, `new-style`, `audit`, `gallery`).
-- [`tests/`](tests/): Complete automated `pytest` test suite (34 passing tests).
-- [`.github/workflows/ci.yml`](.github/workflows/ci.yml): GitHub Actions CI workflow for PR auditing.
-- [`stylelib.py`](stylelib.py): Backward-compatible facade for legacy scripts.
-- [`render_styles_gallery.py`](render_styles_gallery.py): Reproducible generator for all 15 posters and contact sheet.
-- [`styles_gallery/`](styles_gallery/): 15 full-resolution (1200×1600) rendered posters.
-- [`styles_contact_sheet.png`](styles_contact_sheet.png): Master audit sheet (1644×1510).
+- `gallery/` — ten mono-color posters covering all 9 of the skill's layout
+  families, 12 catalog palettes, one-ink and two-ink plate logic, verified
+  against the skill's numeric gates (empty paper, plate shares, determinism).
+- `contact-sheet.png` — the ten posters at thumbnail scale.
+- `monolib.py`, `render_gallery.py` — the poster engine and recipes;
+  reruns are byte-identical.
+- `reel/mono-color-reel.mp4` — **44s motion showreel** (1920×1080·30fps·silent):
+  a phantom print shop runs one job through the machine — paper loads, the ink
+  catalog rises, ten plates flash-cut through with per-poster motion motifs
+  (spinning wheel, rising lanterns, overprinting rings, scrolling road…),
+  the run tiles into a gallery wall, and the end slate sweeps a mint channel
+  through the title above a ticker of the ten recipe seeds: *same seed → same
+  pixels*. Every frame is drawn in code (`reel/render_reel.py`, PIL + ffmpeg).
+- `render_poster.py`, `lighthouse-monocolor.png`, `PROMPT.md` — the original
+  single-poster experiment that started it all.
