@@ -105,3 +105,12 @@ into the 15-style material engine above. The original artifacts remain:
   pixels*. Every frame is drawn in code (`reel/render_reel.py`, PIL + ffmpeg).
 - `render_poster.py`, `lighthouse-monocolor.png`, `PROMPT.md` — the original
   single-poster experiment that started it all.
+- `animated/` — **the posters as seamless 3-second loops** (1200×1600·30fps,
+  ~700KB each, plus `all-posters-loop.mp4` contact sheet). Motion stays inside
+  the print system: the accent ink plate is separated pixel-wise and
+  re-stamped with an oscillating ~2px offset (misregistration, animated), one
+  native motif per poster moves (lanterns rise, the wheel reflector orbits,
+  ripples cross the pooled ink, the eye blinks, the overprint dot dips into
+  the carbon plate, water twinkles, a shooting star, traffic flows down the
+  road), and seeded grain tiles cycle. One-ink posters skip plate breathing —
+  nothing to misregister. Re-renders are byte-identical (`animated/render_animated.py`).
