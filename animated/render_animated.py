@@ -11,6 +11,7 @@ Same seed -> same MP4. One-ink posters skip layer 1 (nothing to misregister).
 """
 import hashlib
 import math
+import os
 import random
 import sys
 
@@ -18,13 +19,15 @@ import numpy as np
 import imageio.v2 as imageio
 from PIL import Image, ImageDraw, ImageFilter
 
-sys.path.insert(0, "..")
+_HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, _HERE + "/..")
+os.chdir(_HERE + "/..")  # poster re-writes land in ./gallery, not animated/
 import render_gallery as G  # noqa: E402
 
 W, H = 1200, 1600
 N_FRAMES = 90
 FPS = 30
-OUT = "."
+OUT = _HERE
 
 # ---------------------------------------------------------------- helpers
 def dist_arr(arr, c):
